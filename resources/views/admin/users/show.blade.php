@@ -20,7 +20,7 @@
 
             </div>
             <div class="card-footer">
-                <form method="POST" action="{{ route('users.update', $user) }}">
+                <form method="POST" action="{{ route('admin.users.update', $user) }}">
                     @csrf
                     @method('PUT')
                     <div>

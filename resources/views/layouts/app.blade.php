@@ -14,7 +14,23 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+
+
+
+    {{-- livewire --}}
+
+    {{-- @livewireStyles --}}
+    {{-- @livewireScripts --}}
+
+
+
+
+
+
+
+
     <!-- Scripts -->
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -41,6 +57,13 @@
                                 <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                             </li>
                         @endif
+
+                        @can('admin.users.index')
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="{{ route('admin.home') }}">Panel administrador</a>
+                            </li>
+                        @endcan
                         {{-- tiene el rol numero
                         {{ auth()->user()->role_id }} --}}
 
@@ -111,10 +134,14 @@
 
                 @endif
             </div>
+
             @yield('content')
         </main>
     </div>
+
 </body>
 {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 
 </html>

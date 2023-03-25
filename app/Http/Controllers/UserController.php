@@ -5,24 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Termwind\Components\Dd;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         DB::connection()->enableQueryLog();
-        if (auth()->user()->role_id === 2) {
 
-            $users = User::paginate(10);
-            $users->items();
-            return view('users.index', compact('users'));
-        }
-        return redirect()->back()->withErrors('No tienes acceso a esta vista ');
-        //
+
+        // if (auth()->user()->role_id === 2) {
+        $search = $request->search;
+        $users = User::where('name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%')
+            ->paginate();
+        // $users->items();
+        return view('admin.users.index', compact('users'));
+
+        // $users->items();
+
+        // }
+        // return redirect()->back()->withErrors('No tienes acceso a esta vista ');
+        // //
     }
 
     /**
@@ -46,12 +52,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        if (auth()->user()->role_id === 2) {
+        // if (auth()->user()->role_id === 2) {
 
 
-            return view('users.show', compact('user'));
-        }
-        return redirect()->back()->withErrors('No tienes acceso a esta funcion ');
+        return view('admin.users.show', compact('user'));
+        // }
+        // return redirect()->back()->withErrors('No tienes acceso a esta funcion ');
         //
     }
 

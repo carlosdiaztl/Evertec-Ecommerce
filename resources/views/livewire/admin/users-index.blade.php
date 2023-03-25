@@ -1,10 +1,24 @@
-@extends('layouts.app')
-@section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h1> Users</h1>
-            </div>
+<div class="container">
+
+
+
+    <div class="card">
+        <div class="card-header">
+
+
+
+            <input class="form-control mr-sm-2 mx-2 form-control-sm" type="search" name="search" placeholder="Search"
+                aria-label="Search">
+
+            <script>
+                Livewire.on('localizationUpdated', () => {
+                    alert('test');
+                });
+            </script>
+
+        </div>
+
+        @if ($users->count())
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
@@ -26,8 +40,8 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->email_verified_at ? 'Verificado' : 'Sin verificar' }}</td>
                                     <td>{{ $user->status }}</td>
-                                    <td><a class="nav-link" href="{{ route('users.show', $user) }}">Show</a>
-                                        <form method="POST" action="{{ route('users.update', $user) }}">
+                                    <td><a class="nav-link" href="{{ route('admin.users.show', $user) }}">Show</a>
+                                        <form method="POST" action="{{ route('admin.users.update', $user) }}">
                                             @csrf
                                             @method('PUT')
                                             <div>
@@ -51,13 +65,17 @@
                     </table>
 
                     <div class="col-11">
-                        @dump(DB::getQueryLog())
+                        {{-- @dump(DB::getQueryLog()) --}}
                         {{ $users->links('pagination::bootstrap-5') }}
                     </div>
 
                 </div>
 
             </div>
-        </div>
+        @else
+            <div class="card-body">
+                <strong>No hay registros</strong>
+            </div>
+        @endif
     </div>
-@endsection
+</div>

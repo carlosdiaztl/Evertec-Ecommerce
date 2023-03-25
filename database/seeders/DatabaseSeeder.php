@@ -17,9 +17,17 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(50)->unverified()->create();
 
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // seeder de los roles 
+        $this->call(RoleSeeder::class);
+
+
+        // usuario de prueba 
+
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'diaz-alzate@hotmail.com',
+            'password' => bcrypt('car123456')
+
+        ])->assignRole('Admin');
     }
 }

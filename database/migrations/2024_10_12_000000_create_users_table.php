@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->unsignedBigInteger('role_id')->default(1);
-            $table->foreign('role_id')->references('id')->on('roles');
+            // $table->unsignedBigInteger('role_id')->default(1);
+            // $table->foreign('role_id')->references('id')->on('roles');
             $table->rememberToken();
             $table->timestamps();
         });
