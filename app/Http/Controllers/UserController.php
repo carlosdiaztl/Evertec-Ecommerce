@@ -9,11 +9,22 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('can:admin.users.index')->only('index');
+    // }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
+        // if (!$this->middleware('can:admin.users.index')) {
+        //     dd('no eres admin');
+        //     return redirect()->back()->withErrors('No tienes acceso a esta vista');
+        // }
+        // dd('si eres admin');
+
         DB::connection()->enableQueryLog();
 
 
