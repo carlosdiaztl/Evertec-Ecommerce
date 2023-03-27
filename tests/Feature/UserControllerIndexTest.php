@@ -16,7 +16,7 @@ class UserControllerIndexTest extends TestCase
     {
 
 
-        // usuaro con permiso de admin 
+        // usuario con permiso de admin 
         $user2 = $user = User::find(51);
         $response = $this->actingAs($user)->get('/admin/users');
         $response->assertStatus(200);
