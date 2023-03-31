@@ -37,7 +37,8 @@ jobs:
           php artisan key:generate
 
       - name: Run Migration
-        run: php artisan migrate --force
+        run: php artisan migrate -v , yes
+
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
