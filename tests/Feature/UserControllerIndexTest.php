@@ -34,7 +34,7 @@ class UserControllerIndexTest extends TestCase
     }
     public function  testIndex_Admin_search()
     {
-        User::firstOrNew([
+        User::make([
             'name' => 'Carlos enrique d ',
             'email' => 'carlosd@hotmail.com',
             'password' => bcrypt('car123456')
