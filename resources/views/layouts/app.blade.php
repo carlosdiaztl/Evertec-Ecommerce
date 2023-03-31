@@ -24,8 +24,8 @@
 
 
 
-
-
+    {{-- sweet alert cdn  --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 
@@ -111,7 +111,8 @@
         </nav>
 
         <main class="py-4">
-            <div class="container-fluid">
+            {{-- zona de errores --}}
+            {{-- <div class="container-fluid">
                 @if (session()->has('success'))
                     <div class="alert alert-success">
 
@@ -133,13 +134,41 @@
 
 
                 @endif
-            </div>
+            </div> --}}
 
             @yield('content')
         </main>
     </div>
 
 </body>
+@if (session()->has('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'congratulations',
+            text: "{{ session()->get('success') }}",
+        })
+    </script>
+@endif
+
+@if (isset($errors) && $errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+        })
+    </script>
+@endif
+
 {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
 {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> --}}

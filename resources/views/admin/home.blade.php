@@ -7,6 +7,7 @@
                 <div class="card">
                     <div class="card-header">Panel Admin <br>
                         <h4> Bienvenido, Que deseas hacer el dia de hoy ? </h4>
+                        {{-- {{ auth()->user()->hasRole('Admin')? 'si': 'no' }} --}}
                     </div>
 
                     <div class="card-body">

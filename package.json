@@ -14,6 +14,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.12.0",
-        "livewire": "^0.6.1"
+        "livewire": "^0.6.1",
+        "sweetalert2": "^11.7.3"
     }
 }
