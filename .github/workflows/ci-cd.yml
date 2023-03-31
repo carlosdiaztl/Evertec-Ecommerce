@@ -13,8 +13,8 @@ jobs:
         run: composer install
       - name: clean confi
         run: php artisan config:cache
-      - name: fill DB
-        run: php artisan migrate --force --seed
+      # - name: fill DB
+      #   run: php artisan migrate --force --seed
       - name: fresh db
         run: php artisan migrate:fresh --seed
       # Test solo en maquina local
