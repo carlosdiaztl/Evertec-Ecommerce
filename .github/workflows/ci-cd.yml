@@ -11,6 +11,6 @@ jobs:
 
       - name: Composer install
         run: composer install
-
-      - name: Laravel Test
-        run: php artisan test
+# Test solo en maquina local
+# - name: Laravel Test
+#   run: php artisan test
