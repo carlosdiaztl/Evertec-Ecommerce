@@ -11,8 +11,12 @@ jobs:
 
       - name: Composer install
         run: composer install
+      - name: clean confi
+        run: php artisan config:cache
       - name: fill DB
-        run: php artisan migrate --force
+        run: php artisan migrate --force --seed
+      - name: fresh db
+        run: php artisan migrate:fresh --seed
       # Test solo en maquina local
       - name: Laravel Test
         run: php artisan test
