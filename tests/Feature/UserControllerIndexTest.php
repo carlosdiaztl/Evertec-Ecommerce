@@ -6,9 +6,12 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserControllerIndexTest extends TestCase
 {
+    // este comando aplica datos temporales en el test
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */
