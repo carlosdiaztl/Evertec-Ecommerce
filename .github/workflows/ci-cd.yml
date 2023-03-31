@@ -20,5 +20,5 @@ jobs:
       #   run: php artisan migrate:fresh --seed
 
       # Test solo en maquina local
-      - name: Laravel Test
-        run: php artisan test
+      # - name: Laravel Test
+      #   run: php artisan test
