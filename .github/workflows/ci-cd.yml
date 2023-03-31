@@ -3,6 +3,24 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: laravel
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    # Versiones donde va a correr las pruebas
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     php-versions: ['7.4', '8.0', '8.1']
+
     steps:
       - uses: actions/checkout@v2
 
@@ -13,6 +31,16 @@ jobs:
         run: composer install
       - name: clean confi
         run: php artisan config:cache
+      - name: Prepare the application
+        run: |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php artisan key:generate
+
+      - name: Run Migration
+        run: php artisan migrate -v
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
       # - name: fill DB
       #   run: php artisan migrate --force --seed
 
@@ -20,5 +48,5 @@ jobs:
       #   run: php artisan migrate:fresh --seed
 
       # Test solo en maquina local
-      # - name: Laravel Test
-      #   run: php artisan test
+      - name: Laravel Test
+        run: php artisan test

@@ -33,6 +33,7 @@ class UserControllerIndexTest extends TestCase
         $response->assertSee('This action is unauthorized.');
     }
     public function  testIndex_Admin_search()
+    // modificar este test para que el acceso sea a traves de la ruta y no la vista 
     {
         User::firstOrNew([
             'name' => 'Carlos enrique d ',
