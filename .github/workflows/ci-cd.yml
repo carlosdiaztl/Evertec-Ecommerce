@@ -50,6 +50,8 @@ jobs:
 
       - name: veirficacion de rutas
         run: php artisan route:list
+      - name: build app
+        run: npm run build
 
       #   env:
       #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
