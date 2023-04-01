@@ -25,8 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: testDb
-        run: dig mydatabase
+      # Ver si la respuesta de conexion si existe (dns)
+      # - name: testDb
+      #   run: dig mydatabase
 
       - name: PHP VERSION
         run: php -v
