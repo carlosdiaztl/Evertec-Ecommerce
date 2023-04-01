@@ -42,7 +42,7 @@ jobs:
       #   run: php artisan config:cache
       - name: Prepare the application
         run: |
-          php -r "file_exists('.env') || copy('.envCi', '.env');"
+          php -r "file_exists('.env') || copy('.envCI', '.env');"
           php artisan key:generate
 
       - name: Run Migration
