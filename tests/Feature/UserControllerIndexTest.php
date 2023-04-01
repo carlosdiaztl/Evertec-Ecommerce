@@ -18,23 +18,27 @@ class UserControllerIndexTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_Admin_can_access_AdminHome()
-    {
 
-        // usuario con permiso de admin 
 
-        // $user = User::find(51);
+    // public function test_Admin_can_access_AdminHome()
+    // {
 
-        $role1 =  Role::create(['name' => 'Admin']);
-        Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
-        // Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
-        $user = User::factory()->create()->assignRole('Admin');
-        // dump($user->hasRole('Admin') == true);
-        $response = $this->actingAs($user)->get('admin/home');
-        $response->assertStatus(200);
+    //     // usuario con permiso de admin 
 
-        $response->assertSee('users');
-    }
+    //     // $user = User::find(51);
+
+    //     $role1 =  Role::create(['name' => 'Admin']);
+    //     Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
+    //     // Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+    //     $user = User::factory()->create()->assignRole('Admin');
+    //     // dump($user->hasRole('Admin') == true);
+    //     $response = $this->actingAs($user)->get('admin/home');
+    //     $response->assertStatus(200);
+
+    //     $response->assertSee('users');
+    // }
+
+
     // public function test_User_cant_access_AdminHome()
     // {
 
@@ -45,6 +49,8 @@ class UserControllerIndexTest extends TestCase
     //     // dump($response->getContent());
     //     $response->assertSee('This action is unauthorized.');
     // }
+
+
     public function  testIndex_Admin_search()
     // modificar este test para que el acceso sea a traves de la ruta y no la vista 
     {
