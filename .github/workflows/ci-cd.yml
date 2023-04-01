@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      mysql:
+      mydatabase:
         image: mysql:latest
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
