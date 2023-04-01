@@ -35,8 +35,9 @@ jobs:
       - name: Composer install
         run: composer install
 
-      - name: install vite
-        run: npm install vite@4.2.1
+      # - name: install vite
+      #   run: npm install vite@4.2.1
+
       # - name: clean confi
       #   run: php artisan config:cache
       - name: Prepare the application
