@@ -28,8 +28,8 @@ class UserControllerIndexTest extends TestCase
         $role1 =  Role::create(['name' => 'Admin']);
         Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
         Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
-        $user = User::factory()->create()->assignRole('Admin');
-        dump($user);
+        $user = User::factory()->create()->assignRole($role1);
+        // dump($user);
         $response = $this->actingAs($user)->get('/admin/users');
         $response->assertStatus(200);
 
