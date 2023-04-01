@@ -24,6 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: testDb
+        run: dig mydatabase
+
       - name: PHP VERSION
         run: php -v
 
