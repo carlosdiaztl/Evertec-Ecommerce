@@ -18,12 +18,24 @@ class UserControllerIndexTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_Admin_can_access_AdminUsers()
+    // public function test_Admin_can_access_AdminUsers()
+    // {
+
+    //     // usuario con permiso de admin 
+
+    //     // $user = User::find(51);
+
+
+    // }
+    public function test_User_cant_access_AdminUsers()
     {
 
-        // usuario con permiso de admin 
-
-        // $user = User::find(51);
+        $user = User::factory()->create();
+        // dump($user);
+        $response = $this->actingAs($user)->get('/admin/home');
+        $response->assertStatus(403);
+        // dump($response->getContent());
+        $response->assertSee('This action is unauthorized.');
 
         $role1 =  Role::create(['name' => 'Admin']);
         Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
@@ -34,16 +46,6 @@ class UserControllerIndexTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertSee('users');
-    }
-    public function test_User_cant_access_AdminUsers()
-    {
-
-        $user = User::factory()->create();
-        // dump($user);
-        $response = $this->actingAs($user)->get('/admin/home');
-        $response->assertStatus(403);
-        // dump($response->getContent());
-        $response->assertSee('This action is unauthorized.');
     }
     public function  testIndex_Admin_search()
     // modificar este test para que el acceso sea a traves de la ruta y no la vista 
