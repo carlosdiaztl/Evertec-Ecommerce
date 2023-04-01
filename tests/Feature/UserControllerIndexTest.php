@@ -7,7 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserControllerIndexTest extends TestCase
 {
@@ -22,7 +23,13 @@ class UserControllerIndexTest extends TestCase
 
         // usuario con permiso de admin 
 
-        $user = User::find(51);
+        // $user = User::find(51);
+
+        $role1 =  Role::create(['name' => 'Admin']);
+        Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+        $user = User::factory()->create()->assignRole('Admin');
+        dump($user);
         $response = $this->actingAs($user)->get('/admin/users');
         $response->assertStatus(200);
 
@@ -31,7 +38,8 @@ class UserControllerIndexTest extends TestCase
     public function test_User_cant_access_AdminUsers()
     {
 
-        $user = User::find(5);
+        $user = User::factory()->create();
+        // dump($user);
         $response = $this->actingAs($user)->get('/admin/users');
         $response->assertStatus(403);
         // dump($response->getContent());
@@ -54,7 +62,7 @@ class UserControllerIndexTest extends TestCase
         // la ruta response es igual a la ruta que llamamos 
         $this->assertEquals('admin.users.index', $response->name());
 
-
+        // dump($response);
 
 
         $users = $response->getData()['users'];

@@ -41,8 +41,8 @@ jobs:
           php -r "file_exists('.env') || copy('.envCi', '.env');"
           php artisan key:generate
 
-      # - name: Run Migration
-      #   run: php artisan migrate -v
+      - name: Run Migration
+        run: php artisan migrate --forge --seed
 
       #   env:
       #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
