@@ -29,7 +29,7 @@ class UserControllerIndexTest extends TestCase
         Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
         // Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
         $user = User::factory()->create()->assignRole('Admin');
-        dump($user->hasRole('Admin') == true);
+        // dump($user->hasRole('Admin') == true);
         $response = $this->actingAs($user)->get('admin/home');
         $response->assertStatus(200);
 
