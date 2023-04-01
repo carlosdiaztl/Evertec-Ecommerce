@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
+use App\Http\Requests\UpdateUser;
+use PDF;
+
+
 
 class UserController extends Controller
 {
@@ -41,7 +44,13 @@ class UserController extends Controller
         // return redirect()->back()->withErrors('No tienes acceso a esta vista ');
         // //
     }
-
+    public function exportPDF()
+    {
+        $users = User::all();
+        $pdf = PDF::loadView('admin.users.users-pdf-export', compact('users'));
+        return $pdf->download('users-list.pdf');
+        // return view('admin.users.users-pdf-export', compact('users'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -83,7 +92,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUser $request, User $user)
     {
         // dd($user);
         // dd($request->status);

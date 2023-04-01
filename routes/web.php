@@ -38,6 +38,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('verified')->group(function () {
         Route::resource('users', App\Http\Controllers\UserController::class)->names('users')->except('store')->middleware(['can:admin.users.index', 'can:admin.users.edit']);
         Route::get('/home', [App\Http\Controllers\AdminHomeController::class, 'index'])->name('home');
+        Route::get('users-pdf-export', [App\Http\Controllers\UserController::class, 'exportPDF'])->name('users-pdf-export');
     });
 });
 

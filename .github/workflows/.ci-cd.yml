@@ -1,0 +1,67 @@
+name: deployProject
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # container: php:8.1-apache
+
+    services:
+      mydatabase:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: E-commerce
+        ports:
+          - 3306:3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    # Versiones donde va a correr las pruebas
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     php-versions: ['7.4', '8.0', '8.1']
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Ver si la respuesta de conexion si existe (dns)
+      # - name: testDb
+      #   run: dig mydatabase
+
+      - name: PHP VERSION
+        run: php -v
+
+      - name: Composer install
+        run: composer install
+
+      - name: install dependecies node-packages
+        run: npm install
+
+      # - name: clean confi
+      #   run: php artisan config:cache
+      - name: Prepare the application
+        run: |
+          php -r "file_exists('.env') || copy('.envCI', '.env');"
+          php artisan key:generate
+
+      - name: Run Migration
+        run: php artisan migrate --no-interaction
+
+      - name: veirficacion de rutas
+        run: php artisan route:list
+      - name: build app
+        run: npm run build
+
+      #   env:
+      #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+      #     REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+      # - name: fill DB
+      #   run: php artisan migrate  --seed
+
+      # - name: fresh db
+      #   run: php artisan migrate:fresh --seed
+
+      # Test solo en maquina local
+      - name: Laravel Test
+        run: php artisan test

@@ -62,9 +62,15 @@
                             </tbody>
                         </table>
 
-                        <div class="col-11">
+                        <div class="row">
+                            <div class="col-10">
+
+                                {{ $users->links('pagination::bootstrap-5') }}
+                            </div>
+                            <div class="col-2">
+                                <a href="{{ route('admin.users-pdf-export') }}" class="btn btn-primary">download pdf </a>
+                            </div>
                             {{-- @dump(DB::getQueryLog()) --}}
-                            {{ $users->links('pagination::bootstrap-5') }}
                         </div>
 
                     </div>
