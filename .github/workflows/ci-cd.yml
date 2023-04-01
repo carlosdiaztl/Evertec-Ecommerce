@@ -34,6 +34,9 @@ jobs:
 
       - name: Composer install
         run: composer install
+
+      - name: install node-packages
+        run: npm install
       # - name: clean confi
       #   run: php artisan config:cache
       - name: Prepare the application
@@ -46,8 +49,6 @@ jobs:
 
       - name: veirficacion de rutas
         run: php artisan route:list
-      - name: run dev
-        run: npm run dev
 
       #   env:
       #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
