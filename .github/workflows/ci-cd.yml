@@ -42,7 +42,7 @@ jobs:
           php artisan key:generate
 
       - name: Run Migration
-        run: php artisan migrate --forge --seed
+        run: php artisan migrate -v
 
       #   env:
       #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
