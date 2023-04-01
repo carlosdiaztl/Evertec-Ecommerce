@@ -13,7 +13,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: E-commerce
         ports:
-          - 3306/tcp
+          - 3306:3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     # Versiones donde va a correr las pruebas
