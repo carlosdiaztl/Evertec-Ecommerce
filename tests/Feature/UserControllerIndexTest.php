@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Config;
 
 class UserControllerIndexTest extends TestCase
 {
@@ -18,6 +19,11 @@ class UserControllerIndexTest extends TestCase
      */
     public function test_Admin_can_access_AdminUsers()
     {
+
+        $entornoloc1 = Config::get('database.connections.mysql');
+        $connection = Config::get('env.DB_CONNECTION');
+        dump($connection, $entornoloc1);
+
         echo ("<script>console.log('PHP db connection: " . getenv('DB_CONNECTION') . "');</script>");
 
         echo ("<script>console.log('PHP DB_PASSWORD: " . getenv('DB_PASSWORD') . "');</script>");
@@ -34,6 +40,8 @@ class UserControllerIndexTest extends TestCase
 
 
         // usuario con permiso de admin 
+        dump(1);
+        dump($_ENV['env']);
         $user = User::find(51);
         $response = $this->actingAs($user)->get('/admin/users');
         $response->assertStatus(200);
