@@ -11,12 +11,26 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class UserControllerIndexTest extends TestCase
 {
     // este comando aplica datos temporales en el test
+
     use RefreshDatabase;
     /**
      * A basic feature test example.
      */
     public function test_Admin_can_access_AdminUsers()
     {
+        echo ("<script>console.log('PHP db connection: " . getenv('DB_CONNECTION') . "');</script>");
+
+        echo ("<script>console.log('PHP DB_PASSWORD: " . getenv('DB_PASSWORD') . "');</script>");
+
+        echo ("<script>console.log('PHP DB_PORT: " . getenv('DB_PORT') . "');</script>");
+
+        echo ("<script>console.log('PHP DB_HOST: " . getenv('DB_HOST') . "');</script>");
+
+        echo ("<script>console.log('PHP DB_USERNAME: " . getenv('DB_USERNAME') . "');</script>");
+
+
+
+
 
 
         // usuario con permiso de admin 
@@ -29,7 +43,11 @@ class UserControllerIndexTest extends TestCase
     public function test_User_cant_access_AdminUsers()
     {
 
-        $user = User::find(12);
+        $user = User::create([
+            'name' => 'Carlos enrique d ',
+            'email' => 'carlosd@hotmail.com',
+            'password' => bcrypt('car123456')
+        ]);
         $response = $this->actingAs($user)->get('/admin/users');
         $response->assertStatus(403);
         // dump($response->getContent());
@@ -38,7 +56,7 @@ class UserControllerIndexTest extends TestCase
     public function  testIndex_Admin_search()
     // modificar este test para que el acceso sea a traves de la ruta y no la vista 
     {
-        User::firstOrNew([
+        User::create([
             'name' => 'Carlos enrique d ',
             'email' => 'carlosd@hotmail.com',
             'password' => bcrypt('car123456')
