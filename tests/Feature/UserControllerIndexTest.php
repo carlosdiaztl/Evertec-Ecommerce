@@ -27,10 +27,10 @@ class UserControllerIndexTest extends TestCase
 
         $role1 =  Role::create(['name' => 'Admin']);
         Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
-        Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
-        $user = User::factory()->create()->assignRole($role1);
-        // dump($user);
-        $response = $this->actingAs($user)->get('/admin/users');
+        // Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+        $user = User::factory()->create()->assignRole('Admin');
+        // dump($user->hasRole('Admin') == true);
+        $response = $this->actingAs($user)->get('/admin/home');
         $response->assertStatus(200);
 
         $response->assertSee('users');
@@ -40,7 +40,7 @@ class UserControllerIndexTest extends TestCase
 
         $user = User::factory()->create();
         // dump($user);
-        $response = $this->actingAs($user)->get('/admin/users');
+        $response = $this->actingAs($user)->get('/admin/home');
         $response->assertStatus(403);
         // dump($response->getContent());
         $response->assertSee('This action is unauthorized.');
