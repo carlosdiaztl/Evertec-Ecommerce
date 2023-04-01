@@ -3,6 +3,7 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: php:8.1-apache
 
     services:
       mydatabase:
