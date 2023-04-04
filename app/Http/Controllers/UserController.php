@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UpdateUser;
+//excel
+use Maatwebsite\Excel\facades\Excel;
+use App\Exports\UsersExport;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+//pdf
 use PDF;
 
 
@@ -47,9 +53,13 @@ class UserController extends Controller
     public function exportPDF()
     {
         $users = User::all();
-        $pdf = PDF::loadView('admin.users.users-pdf-export', compact('users'));
+        $pdf = FacadePdf::loadView('admin.users.users-pdf-export', compact('users'));
         return $pdf->download('users-list.pdf');
         // return view('admin.users.users-pdf-export', compact('users'));
+    }
+    public function exportExcel()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
     /**
      * Show the form for creating a new resource.
