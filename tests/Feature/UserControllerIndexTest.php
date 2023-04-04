@@ -21,7 +21,7 @@ class UserControllerIndexTest extends TestCase
     public function test_Admin_can_access_AdminHome()
     {
 
-        // usuario con permiso de admin 
+        // usuario con permiso de admin 1
 
         // $user = User::find(51);
 
