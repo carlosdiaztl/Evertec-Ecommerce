@@ -41,6 +41,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UserController::class)->names('users')->except('store')->middleware(['can:admin.users.index', 'can:admin.users.edit']);
         Route::get('/home', [AdminHomeController::class, 'index'])->name('home');
         Route::get('users-pdf-export', [UserController::class, 'exportPDF'])->name('users-pdf-export');
+        Route::get('users-excel-export', [UserController::class, 'exportExcel'])->name('users-excel-export');
+
+        // ruta admin products
+        Route::resource('products', UserController::class)->names('products')->middleware(['admin.products.index']);
     });
 });
 

@@ -13,7 +13,7 @@ class LoginInactiveTest extends TestCase
      * A basic feature test example.
      */
     use RefreshDatabase;
-    public function test_example(): void
+    public function test_if_user_inactive_cant_login(): void
     {
         $user = User::create([
             'name' => 'Carlos enrique d ',

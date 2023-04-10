@@ -2,7 +2,7 @@
 @section('content')
     {{-- @livewire('admin.users-index') --}}
     <div class="container">
-
+        <a href="{{ route('admin.users-excel-export') }}">exportar en excel</a>
 
         <div class="card">
             <div class="card-header">
