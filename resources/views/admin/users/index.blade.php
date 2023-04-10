@@ -2,7 +2,7 @@
 @section('content')
     {{-- @livewire('admin.users-index') --}}
     <div class="container">
-        <a href="{{ route('admin.users-excel-export') }}">exportar en excel</a>
+
 
         <div class="card">
             <div class="card-header">
@@ -67,8 +67,26 @@
 
                                 {{ $users->links('pagination::bootstrap-5') }}
                             </div>
+
                             <div class="col-2">
-                                <a href="{{ route('admin.users-pdf-export') }}" class="btn btn-primary">download pdf </a>
+
+
+                                <div class="demo-inline-spacing">
+                                    <div class="btn-group" id="hover-dropdown-demo">
+                                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                            data-bs-toggle="dropdown" data-trigger="hover">
+                                            Export
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li> <a class="dropdown-item" href="{{ route('admin.users-pdf-export') }}">Pdf
+                                                </a></li>
+                                            <li> <a class="dropdown-item" href="{{ route('admin.users-excel-export') }}">
+                                                    Excel</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
                             </div>
                             {{-- @dump(DB::getQueryLog()) --}}
                         </div>
