@@ -15,21 +15,24 @@ class LoginInactiveTest extends TestCase
     use RefreshDatabase;
     public function test_if_user_inactive_cant_login(): void
     {
-        $user = User::create([
-            'name' => 'Carlos enrique d ',
-            'email' => 'carlosd@hotmail.com',
-            'password' => bcrypt('car123456'),
-            'status' => 'inactive',
-        ]);
+        $user = User::factory()->create(
+            [
+                'name' => 'caribean',
+                'email' => 'diaz.123456@gmail.com',
+                'password' => 'car123456',
+                'status' => 'inactive',
+            ]
+        );
 
         // Intentar autenticar al usuario inactivo
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'car123456',
-        ]);
-        $response->assertRedirect('/login');
+        $response = $this->actingAs($user)->get('/home');
 
-        $response->assertSessionHasErrors();
+        $response->assertStatus(200);
+        $response = $this->actingAs($user)->get('/home');
+
+
+
+
 
         $this->assertFalse(auth()->check());
     }

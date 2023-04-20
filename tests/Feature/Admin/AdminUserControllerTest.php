@@ -1,19 +1,21 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin;
 
-use App\Http\Controllers\UserController;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class UserControllerIndexTest extends TestCase
+class AdminUserControllerTest extends TestCase
 {
-    // este comando aplica datos temporales en el test
-
+    /**
+     * A basic feature test example.
+     */
     use RefreshDatabase;
     /**
      * A basic feature test example.
@@ -55,7 +57,7 @@ class UserControllerIndexTest extends TestCase
         ]);
         // consulta de prueba con usuario creado 
         $request = new Request(['search' => 'Carlos']);
-        $controller = new UserController();
+        $controller = new AdminUserController();
         $response = $controller->index($request);
 
 

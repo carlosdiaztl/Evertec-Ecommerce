@@ -15,7 +15,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
 
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
     {{-- livewire --}}
 
@@ -102,6 +102,13 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    <a class="dropdown-item" href="{{ route('user.edit', $user = auth()->user()) }}">
+                                        Ver perfil
+                                    </a>
+
+
+
+
                                 </div>
                             </li>
                         @endguest
