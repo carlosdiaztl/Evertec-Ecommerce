@@ -61,8 +61,7 @@ jobs:
 
       # - name: fresh db
       #   run: php artisan migrate:fresh --seed
-      - name: creacion de directorio
-        run: mkdir public/images
+
       - name: image
         run: php artisan storage:link
       - name: permission to write
