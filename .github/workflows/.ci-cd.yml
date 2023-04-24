@@ -65,7 +65,7 @@ jobs:
       - name: image
         run: php artisan storage:link
       - name: creacion de directorio
-        run: mkdir public/images
+        run: mkdir storage/public/images
       - name: permission to write
         run: chmod -R 755 storage
       - name: comando de permisos
