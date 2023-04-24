@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Storage::deleteDirectory('public/images');
-        Storage::makeDirectory('public/images');
+        // Storage::deleteDirectory('public/images');
+        // Storage::makeDirectory('public/images');
         User::factory(22)->create();
         //funcion de usuarios sin corrreo verificadp
         // \App\Models\User::factory(50)->unverified()->create();
