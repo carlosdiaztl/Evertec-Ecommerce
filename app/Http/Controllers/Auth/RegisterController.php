@@ -49,9 +49,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // dd($data);
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:200', 'regex:/^[a-zA-Z\s]+$/'],
+            'lastName' => ['required', 'string', 'max:200', 'regex:/^[a-zA-Z\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'identification' => "required|integer|min:999|max:9999999999|unique:users",
+            'phone' => ['required', 'string', 'min:10', 'max:10', 'regex:/^\d{10}$/', 'unique:users'],
+            'address' => ['required', 'string', 'max:255', 'regex:/^[0-9a-zA-Z\s\#\-\.áéíóúñÁÉÍÓÚÑ\(\),]+$/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -64,9 +69,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // dd($data['lastName']);
         return User::create([
+            'lastName' => $data['lastName'],
             'name' => $data['name'],
             'email' => $data['email'],
+            'identification' => $data['identification'],
+            'phone' =>  $data['phone'],
+            'address' => $data['address'],
             'password' => Hash::make($data['password']),
         ]);
     }

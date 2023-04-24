@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
-                            <thead>
+                            <thead class="table-light">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
@@ -38,8 +38,12 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->email_verified_at ? 'Verificado' : 'Sin verificar' }}</td>
                                         <td>{{ $user->status }}</td>
-                                        <td><a class="nav-link" href="{{ route('admin.users.show', $user) }}">Show</a>
-                                            <form method="POST" action="{{ route('admin.users.update', $user) }}">
+                                        <td class="d-flex"><a class="nav-link"
+                                                href="{{ route('admin.users.show', $user) }}"><i class="ti ti-eye"
+                                                    style="font-size: 24px;"></i></a>
+                                            <a class="nav-link" href="{{ route('admin.users.edit', $user) }}"><i
+                                                    class="ti ti-pencil" style="font-size: 24px;"></i></a>
+                                            {{-- <form method="POST" action="{{ route('admin.users.update', $user) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <div>
@@ -53,7 +57,7 @@
                                                 <button type="submit"
                                                     class="btn btn-{{ $user->status == 'active' ? 'danger' : 'success' }}">{{ $user->status == 'active' ? 'Inactivar' : 'Activar' }}
                                                 </button>
-                                            </form>
+                                            </form> --}}
 
                                         </td>
                                     </tr>

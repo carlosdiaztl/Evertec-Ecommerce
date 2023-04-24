@@ -62,6 +62,15 @@ jobs:
       # - name: fresh db
       #   run: php artisan migrate:fresh --seed
 
+      - name: image
+        run: php artisan storage:link
+      - name: creacion de directorio
+        run: mkdir -p storage/app/public/images
+      - name: permission to write
+        run: chmod -R 755 storage
+      - name: comando de permisos
+        run: chmod -R 777 /home/runner/work/Evertec-Ecommerce/Evertec-Ecommerce/storage/app/public/images
+
       # Test solo en maquina local
       - name: Laravel Test
         run: php artisan test

@@ -2,126 +2,78 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Middleware\CheckUserAccess;
 use App\Http\Requests\UpdateUser;
-//excel
-use Maatwebsite\Excel\facades\Excel;
-use App\Exports\UsersExport;
-use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
-//pdf
-use PDF;
-
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('can:admin.users.index')->only('index');
-    // }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
+    public function __construct()
     {
-        // if (!$this->middleware('can:admin.users.index')) {
-        //     dd('no eres admin');
-        //     return redirect()->back()->withErrors('No tienes acceso a esta vista');
-        // }
-        // dd('si eres admin');
+        // Middleware global para todo el controlador
+        // $this->middleware(CheckUserAccess::class);
 
-        DB::connection()->enableQueryLog();
-
-
-        // if (auth()->user()->role_id === 2) {
-        $search = $request->search;
-        $users = User::where('name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%')
-            ->paginate();
-        // $users->items();
-        return view('admin.users.index', compact('users'));
-
-        // $users->items();
-
-        // }
-        // return redirect()->back()->withErrors('No tienes acceso a esta vista ');
-        // //
-    }
-    public function exportPDF()
-    {
-        $users = User::all();
-        $pdf = FacadePdf::loadView('admin.users.users-pdf-export', compact('users'));
-        return $pdf->download('users-list.pdf');
-        // return view('admin.users.users-pdf-export', compact('users'));
-    }
-    public function exportExcel()
-    {
-        return Excel::download(new UsersExport, 'users.xlsx');
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $this->middleware(CheckUserAccess::class . ':user');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    //
+    public function edit(User $user)
     {
-        //
+
+
+        return view('user.edit', compact('user'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
+    public function Update(UpdateUser $request, User $user)
     {
-        // if (auth()->user()->role_id === 2) {
+        // dd($request);
+
+        if ($request->has('password')) {
+
+            $user->update(
+                [
+                    'password' =>  Hash::make($request->password)
+                ]
+            );
 
 
-        return view('admin.users.show', compact('user'));
-        // }
-        // return redirect()->back()->withErrors('No tienes acceso a esta funcion ');
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateUser $request, User $user)
-    {
+            return redirect()->back()->withSuccess("Clave modificada con exito ");
+        }
+        if ($request->has('image')) {
+            $path = $request['image']->store('public/images');
+            // dd($path);
+            $newpath = str_replace("public", "storage", $path);
+            // dd($path, $newpath);
+            // dd($path);
+            $user->update(
+                [
+                    'image' =>  $newpath
+                ]
+            );
+
+
+
+
+            return redirect()->back()->withSuccess("Imagen actualizada con exito ");
+        }
+
+
+
+
+        if ($request['email'] !== $user->email) {
+
+            $user->email_verified_at = null;
+
+            $user->update($request->all());
+        }
+        $user->update($request->all());
+
         // dd($user);
-        // dd($request->status);
-        $user->update(
-            [
-                'status' => $request->status
-            ]
-        );
-        // dd($user);
-        $state = $request->status == 'active' ?  'activado' : 'desactivado';
-        return redirect()->back()->withSuccess("Usuario {$state} con exito ");
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->back()->withSuccess("Usuario editado con exito");
     }
 }

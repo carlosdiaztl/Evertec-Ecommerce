@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class LoginInactiveTest extends TestCase
@@ -15,20 +15,18 @@ class LoginInactiveTest extends TestCase
     use RefreshDatabase;
     public function test_if_user_inactive_cant_login(): void
     {
-        $user = User::create([
+        $user = User::factory()->create([
             'name' => 'Carlos enrique d ',
             'email' => 'carlosd@hotmail.com',
-            'password' => bcrypt('car123456'),
+            'password' => 'car123456',
             'status' => 'inactive',
         ]);
+        Auth::login($user);
 
-        // Intentar autenticar al usuario inactivo
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'car123456',
-        ]);
+        $response = $this->get('/home');
+        $response->assertStatus(302);
+
         $response->assertRedirect('/login');
-
         $response->assertSessionHasErrors();
 
         $this->assertFalse(auth()->check());

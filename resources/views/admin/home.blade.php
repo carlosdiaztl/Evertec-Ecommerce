@@ -22,11 +22,11 @@
 
 
                             <li class="nav-item">
-                                <a class="btn btn-primary btn-md" href="{{ route('admin.users.index') }}">Administrar
+                                <a class="btn btn-primary " href="{{ route('admin.users.index') }}">Administrar
                                     usuarios</a>
                             </li>
                             <li class="nav-item mt-2">
-                                <a class="btn btn-primary btn-md" href="#">Link</a>
+                                <a class="btn btn-primary " href="#">Administar Productos </a>
                             </li>
 
                         </ul>
