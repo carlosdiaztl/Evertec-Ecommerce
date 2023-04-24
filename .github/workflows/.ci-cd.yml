@@ -61,7 +61,8 @@ jobs:
 
       # - name: fresh db
       #   run: php artisan migrate:fresh --seed
-
+      - name: image
+        run: php artisan storage:link
       # Test solo en maquina local
       - name: Laravel Test
         run: php artisan test
