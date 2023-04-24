@@ -64,10 +64,12 @@ jobs:
 
       - name: image
         run: php artisan storage:link
+      - name: creacion de directorio
+        run: mkdir public/images
       - name: permission to write
         run: chmod -R 755 storage
       - name: comando de permisos
-        run: chmod 777 public/storage/images
+        run: chmod 777 public/images
 
       # Test solo en maquina local
       - name: Laravel Test
