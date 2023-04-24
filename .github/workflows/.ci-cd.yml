@@ -61,10 +61,14 @@ jobs:
 
       # - name: fresh db
       #   run: php artisan migrate:fresh --seed
+      - name: creacion de directorio
+        run: mkdir public/images
       - name: image
         run: php artisan storage:link
       - name: permission to write
         run: chmod -R 755 storage
+      - name: comando de permisos
+        run: chmod -R
 
       # Test solo en maquina local
       - name: Laravel Test
