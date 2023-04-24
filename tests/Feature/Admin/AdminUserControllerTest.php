@@ -50,7 +50,7 @@ class AdminUserControllerTest extends TestCase
     public function  testIndex_Admin_search()
     // modificar este test para que el acceso sea a traves de la ruta y no la vista 
     {
-        User::create([
+        User::factory()->create([
             'name' => 'Carlos enrique d ',
             'email' => 'carlosd@hotmail.com',
             'password' => bcrypt('car123456')

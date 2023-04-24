@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\UpdateUser;
 //excel
 use Maatwebsite\Excel\facades\Excel;
 use App\Exports\UsersExport;
+use App\Http\Requests\Admin\AdminUserFormRequest;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 //pdf
 use PDF;
 
@@ -87,9 +88,9 @@ class AdminUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUser $request, User $user)
+    public function update(AdminUserFormRequest $request, User $user)
     {
-        // dd($request);
+
 
         if ($request->has('status')) {
             $user->update(
@@ -114,23 +115,9 @@ class AdminUserController extends Controller
 
             return redirect()->back()->withSuccess("Clave modificada con exito ");
         }
-        if ($request->has('image')) {
-            $path = $request['image']->store('public/images');
-            // dd($path);
-            $newpath = str_replace("public", "storage", $path);
-            // dd($path, $newpath);
-            // dd($path);
-            $user->update(
-                [
-                    'image' =>  $newpath
-                ]
-            );
 
+        return redirect()->back()->withErrors('Solo puedes actualizar la contraseña y el estado del usuario  ');
 
-
-
-            return redirect()->back()->withSuccess("Imagen actualizada con exito ");
-        }
 
         //
     }

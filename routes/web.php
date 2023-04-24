@@ -40,7 +40,7 @@ Auth::routes(['verify' => true]);
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware('verified')->group(function () {
+    Route::middleware('verified',)->group(function () {
         Route::resource('users', AdminUserController::class)->names('users')->except('store')->middleware(['can:admin.users.index', 'can:admin.users.edit']);
         Route::get('/home', [AdminAdminHomeController::class, 'index'])->name('home');
         Route::get('users-pdf-export', [AdminUserController::class, 'exportPDF'])->name('users-pdf-export');
@@ -54,6 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::middleware('verified')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/user/{user} ', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('user/{user}', [UserController::class, 'update'])->name('user.update');
 
     // Route::resource('users', App\Http\Controllers\UserController::class)->names('admin.users')->except('store');
 });

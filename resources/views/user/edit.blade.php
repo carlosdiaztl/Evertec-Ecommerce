@@ -5,7 +5,7 @@
             <h5 class="card-header">Profile Details</h5>
             <!-- Account -->
 
-            <form method="POST" action="{{ route('admin.users.update', $user) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('user.update', $user) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -15,7 +15,7 @@
                         <img src="{{ asset($user->image) }}" alt="user-avatar" width="200px" height="350px"
                             class="d-block w-px-100 h-px-100 rounded" />
                         <div class="button-wrapper">
-                            <label for="upload" class="btn btn-primary me-2 mb-3" tabindex="0">
+                            <label for="upload" class="btn btn-secondary me-2 mb-3" tabindex="0">
                                 <span class="d-none d-sm-block">Upload new photo</span>
                                 <i class="ti ti-upload d-block d-sm-none"></i>
                                 <input type="file" id="upload" name="image" class="account-file-input"
@@ -23,7 +23,7 @@
                                     accept="image/png, image/jpeg" />
 
                             </label>
-                            <button type="submit" class="btn btn-secondary account-image-reset mb-3">
+                            <button type="submit" class="btn btn-primary account-image-reset mb-3">
                                 <i class="ti ti-refresh-dot d-block d-sm-none"></i>
                                 <span class="d-none d-sm-block">Confirm</span>
                             </button>
@@ -41,44 +41,49 @@
             </form>
             <hr class="my-0" />
             <div class="card-body">
-                <form method="POST" {{-- action="{{ route('user.update', $user) }}" --}}>
+                <form method="POST" action="{{ route('user.update', $user) }}">
                     @csrf
                     @method('PUT')
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">First Name</label>
-                            <input class="form-control" type="text" name="firstName" value="John" autofocus />
+                            <input class="form-control" type="text" name="name"
+                                value="{{ old('name') ?? $user->name }}" autofocus />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="lastName" class="form-label">Last Name</label>
-                            <input class="form-control" type="text" name="lastName" value="Doe" />
+                            <input class="form-control" type="text" name="lastName"
+                                value="{{ old('lastName') ?? $user->lastName }}" />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="email" class="form-label">E-mail</label>
-                            <input class="form-control" type="text" name="email" value="john.doe@example.com"
-                                placeholder="john.doe@example.com" />
+                            <input class="form-control" type="email" name="email"
+                                value="{{ old('email') ?? $user->email }}" placeholder="john.doe@example.com" />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="identification" class="form-label">Identification</label>
-                            <input type="text" class="form-control" name="identification" value="100215654" />
+                            <input type="text" class="form-control" name="identification"
+                                value="{{ old('identification') ?? $user->identification }}" />
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label class="form-label" for="phoneNumber">Phone Number</label>
+                            <label class="form-label" for="phone">Phone Number</label>
                             <div class="input-group input-group-merge">
-                                <span class="input-group-text">Col (+57)</span>
-                                <input type="text" name="phoneNumber" class="form-control" placeholder="202 555 0111" />
+                                <span class="input-group-text">Col(+57)</span>
+                                <input type="text" name="phone" class="form-control" placeholder=""
+                                    value="{{ old('phone') ?? $user->phone }}" />
                             </div>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" name="address" placeholder="Address" />
+                            <input type="text" class="form-control" name="address" placeholder="Address"
+                                value="{{ old('address') ?? $user->address }}" />
                         </div>
 
                     </div>
-                    {{-- <div class="mt-2">
-                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                    <button type="reset" class="btn btn-label-secondary">Cancel</button>
-                </div> --}}
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                        {{-- <button type="reset" class="btn btn-label-secondary">Cancel</button> --}}
+                    </div>
                 </form>
             </div>
 
@@ -89,14 +94,14 @@
         <div class="card mb-4 mt-2">
             <h5 class="card-header">Change Password</h5>
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.users.update', $user) }}">
+                <form method="POST" action="{{ route('user.update', $user) }}">
                     @csrf
                     @method('PUT')
                     <div class="row">
                         <div class="mb-3 col-md-6 form-password-toggle">
-                            <label class="form-label" for="currentPassword">New Password</label>
+                            <label class="form-label" for="Password">New Password</label>
                             <div class="input-group input-group-merge">
-                                <input class="form-control" type="password" name="currentPassword" id="currentPassword"
+                                <input class="form-control" type="password" name="password"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
@@ -104,7 +109,7 @@
                         <div class="mb-3 col-md-6 form-password-toggle">
                             <label class="form-label" for="confirmPassword">Confirm New Password</label>
                             <div class="input-group input-group-merge">
-                                <input class="form-control" type="password" name="confirmPassword" id="confirmPassword"
+                                <input class="form-control" type="password" name="password_confirmation"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>

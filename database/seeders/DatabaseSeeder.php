@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         Storage::deleteDirectory('public/images');
         Storage::makeDirectory('public/images');
-        \App\Models\User::factory(5)->create();
+        User::factory(22)->create();
         //funcion de usuarios sin corrreo verificadp
         // \App\Models\User::factory(50)->unverified()->create();
 
@@ -26,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
         // usuario de prueba 
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'Test User',
             'email' => 'diaz-alzate@hotmail.com',
             'password' => bcrypt('car123456')

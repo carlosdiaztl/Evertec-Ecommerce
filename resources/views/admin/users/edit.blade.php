@@ -27,32 +27,34 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="firstName" class="form-label">First Name</label>
-                        <input readonly class="form-control" type="text" name="firstName" value="John" autofocus />
+                        <input readonly class="form-control" type="text" name="firstName" value="{{ $user->name }}"
+                            autofocus />
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="lastName" class="form-label">Last Name</label>
-                        <input readonly class="form-control" type="text" name="lastName" value="Doe" />
+                        <input readonly class="form-control" type="text" name="lastName" value="{{ $user->lastName }}" />
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="email" class="form-label">E-mail</label>
-                        <input readonly class="form-control" type="text" name="email" value="john.doe@example.com"
-                            placeholder="john.doe@example.com" />
+                        <input readonly class="form-control" type="text" name="email" value="{{ $user->email }}"
+                            placeholder="{{ $user->email }}" />
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="identification" class="form-label">Identification</label>
-                        <input readonly type="text" class="form-control" name="identification" value="100215654" />
+                        <input readonly type="text" class="form-control" name="identification"
+                            value="{{ $user->identification }}" />
                     </div>
                     <div class="mb-3 col-md-6">
                         <label class="form-label" for="phoneNumber">Phone Number</label>
                         <div class="input-group input-group-merge">
-                            <span class="input-group-text">Col (+57)</span>
+                            <span class="input-group-text">Col(+57) </span>
                             <input readonly type="text" name="phoneNumber" class="form-control"
-                                placeholder="202 555 0111" />
+                                value="{{ $user->phone }}" />
                         </div>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="address" class="form-label">Address</label>
-                        <input readonly type="text" class="form-control" name="address" placeholder="Address" />
+                        <input readonly type="text" class="form-control" name="address" value="{{ $user->address }}" />
                     </div>
 
                 </div>
@@ -100,7 +102,7 @@
                     @method('PUT')
                     <div class="row">
                         <div class="mb-3 col-md-6 form-password-toggle">
-                            <label class="form-label" for="currentPassword">New Password</label>
+                            <label class="form-label" for="Password">New Password</label>
                             <div class="input-group input-group-merge">
                                 <input class="form-control" type="password" name="password"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
