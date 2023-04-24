@@ -67,7 +67,7 @@ jobs:
       - name: permission to write
         run: chmod -R 755 storage
       - name: comando de permisos
-        run: chmod 777 public/images
+        run: chmod 777 public/storage/images
 
       # Test solo en maquina local
       - name: Laravel Test
