@@ -63,6 +63,9 @@ jobs:
       #   run: php artisan migrate:fresh --seed
       - name: image
         run: php artisan storage:link
+      - name: permission to write
+        run: chmod -R 755 storage
+
       # Test solo en maquina local
       - name: Laravel Test
         run: php artisan test
