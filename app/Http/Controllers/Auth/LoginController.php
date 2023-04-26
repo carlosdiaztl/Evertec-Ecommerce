@@ -47,13 +47,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    // protected function authenticated()
-    // {
-
-
-    //     if (auth()->user()->status === 'inactive') {
-    //         auth()->logout();
-    //         return redirect('/login')->withErrors('Tu cuenta está inactiva.');
-    //     }
-    // }
 }

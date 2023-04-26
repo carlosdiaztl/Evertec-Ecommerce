@@ -3,7 +3,6 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-    # container: php:8.1-apache
 
     services:
       mydatabase:
@@ -16,18 +15,8 @@ jobs:
           - 3306:3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-    # Versiones donde va a correr las pruebas
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     php-versions: ['7.4', '8.0', '8.1']
-
     steps:
       - uses: actions/checkout@v2
-
-      # Ver si la respuesta de conexion si existe (dns)
-      # - name: testDb
-      #   run: dig mydatabase
 
       - name: PHP VERSION
         run: php -v
@@ -53,20 +42,11 @@ jobs:
       - name: build app
         run: npm run build
 
-      #   env:
-      #     DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-      #     REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
-      # - name: fill DB
-      #   run: php artisan migrate  --seed
-
-      # - name: fresh db
-      #   run: php artisan migrate:fresh --seed
-
-      - name: image
+      - name: image link to storage
         run: php artisan storage:link
       - name: creacion de directorio
         run: mkdir -p storage/app/public/images
-      - name: permission to write
+      - name: comando de permisos
         run: chmod -R 755 storage
       - name: comando de permisos
         run: chmod -R 777 /home/runner/work/Evertec-Ecommerce/Evertec-Ecommerce/storage/app/public/images

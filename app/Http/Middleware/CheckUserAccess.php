@@ -17,7 +17,7 @@ class CheckUserAccess
     {
         $user = $request->user();
 
-        if ($user && $user != $request->route()->parameter('user')) {
+        if ($user->id != $request->route()->parameter('user')->id) {
             $content = '<div style="background-color: #F44336; color: white; padding: 10px;">
             <h1>403 THIS ACTION IS UNAUTHORIZED.
                 </h1> </div>';

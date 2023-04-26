@@ -22,13 +22,10 @@ class LoginInactiveTest extends TestCase
             'status' => 'inactive',
         ]);
         Auth::login($user);
-
         $response = $this->get('/home');
         $response->assertStatus(302);
-
         $response->assertRedirect('/login');
         $response->assertSessionHasErrors();
-
         $this->assertFalse(auth()->check());
     }
 }
