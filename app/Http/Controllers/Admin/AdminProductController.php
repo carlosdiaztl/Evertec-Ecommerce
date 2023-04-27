@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
@@ -12,7 +14,9 @@ class AdminProductController extends Controller
      */
     public function index()
     {
-        return view('admin.products.index');
+        $products = Product::paginate(7);
+
+        return view('admin.products.index', compact('products'));
         //
     }
 
@@ -21,6 +25,8 @@ class AdminProductController extends Controller
      */
     public function create()
     {
+        $categories = Category::all();
+        return view('admin.products.create', compact('categories'));
         //
     }
 
@@ -29,6 +35,19 @@ class AdminProductController extends Controller
      */
     public function store(Request $request)
     {
+        $path = $request['image']->store('public/images');
+        $newpath = str_replace("public/images", "", $path);
+        Product::create([
+            'title' => $request['title'],
+            'image' => $newpath,
+            'category_id' => $request['category_id'],
+            'description' => $request['description'],
+            'status' => $request['status'],
+            'price' => $request['price'],
+            'stock' => $request['stock']
+        ]);
+        return redirect()->back()->withSuccess('Producto creado ');
+
         //
     }
 

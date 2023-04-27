@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
@@ -20,10 +22,12 @@ class DatabaseSeeder extends Seeder
         User::factory(22)->create();
         //funcion de usuarios sin corrreo verificadp
         // \App\Models\User::factory(50)->unverified()->create();
-
+        Category::factory(3)->create();
+        Product::factory(15)->create();
 
         // seeder de los roles 
         $this->call(RoleSeeder::class);
+
 
 
         // usuario de prueba 
