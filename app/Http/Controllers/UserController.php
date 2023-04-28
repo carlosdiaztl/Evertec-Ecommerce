@@ -37,6 +37,10 @@ class UserController extends Controller
             return redirect()->back()->withSuccess("Clave modificada con exito ");
         }
         if ($request->has('image')) {
+            // fasat storage storage para buscar el patch de la imagen actual y borrarla 
+
+
+
             $path = $request['image']->store('public/images');
             $newpath = str_replace("public", "storage", $path);
             $user->update(

@@ -6,19 +6,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Tests\TestCase;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use Tests\TestCase;
 
-class UserControllerTest extends TestCase
+class UsersControllerTest extends TestCase
 {
     /**
      * A basic feature test example.
      */
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
     public function  testIndex_Admin_search()
     {
         User::factory()->create([
@@ -34,5 +31,19 @@ class UserControllerTest extends TestCase
         $this->assertTrue($users->contains(function ($user) use ($request) {
             return str_contains($user->name, $request->query('search'));
         }));
+    }
+    public function test_admin_edit_userpassword()
+    {
+        $role1 =  Role::create(['name' => 'Admin']);
+        Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+        $user = User::factory()->create()->assignRole('Admin');
+        $user2 = User::factory()->create();
+        $response = $this->actingAs($user)->get(route('admin.users.edit', $user));
+        $response->assertStatus(200);
+        $response->assertSee('users');
+        $response = $this->actingAs($user)->get(route('admin.users.edit', $user2));
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.users.edit');
     }
 }
