@@ -1,69 +1,10 @@
 @extends('layouts.app')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+@endsection
 @section('content')
-    {{-- <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
-        <!-- Container wrapper -->
-        <div class="container">
-            <!-- Toggle button -->
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent1"
-                aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
+    <!--Main layout-->
 
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-                <!-- Navbar brand -->
-                <a class="navbar-brand mt-2 mt-sm-0" href="https://mdbootstrap.com/">
-                    <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="20"
-                        alt="MDB Logo" loading="lazy" />
-                </a>
-                <!-- Left links -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link " href="https://mdbootstrap.com/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://mdbootstrap.com/docs/standard/">About MDB</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://mdbootstrap.com/docs/standard/getting-started/installation/">Free
-                            download</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://mdbootstrap.com/education/bootstrap/">Free tutorials</a>
-                    </li>
-                </ul>
-                <!-- Left links -->
-            </div>
-            <!-- Collapsible wrapper -->
-
-            <!-- Right elements -->
-            <div class="d-flex align-items-center">
-                <!-- Icon -->
-                <a class="nav-link me-3" href="#">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
-                </a>
-
-                <a class="nav-link me-3" href="#">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a class="nav-link me-3" href="#">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="border rounded px-2 nav-link"
-                    target="_blank">
-                    <i class="fab fa-github me-2"></i>MDB GitHub
-                </a>
-            </div>
-            <!-- Right elements -->
-
-        </div>
-        <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
-
-    <!-- carousel -->
     <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-mdb-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="0" class="active"
@@ -73,30 +14,17 @@
             <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="2"
                 aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner">
+        <div class="carousel-inner container-carousel">
             <div class="carousel-item active">
                 <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%282%29.jpg"
-                    class="d-block w-100" alt="Wild Landscape" />
+                    class="d-block w-100 h-100" alt="Wild Landscape" />
                 <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
                 <div class="carousel-caption d-none d-sm-block mb-5">
                     <h1 class="mb-4">
-                        <strong>Learn Bootstrap 5 with MDB</strong>
+                        <strong>Special offers</strong>
                     </h1>
 
-                    <p>
-                        <strong>Best & free guide of responsive web design</strong>
-                    </p>
 
-                    <p class="mb-4 d-none d-md-block">
-                        <strong>The most comprehensive tutorial for the Bootstrap 5. Loved by over 3 000 000 users. Video
-                            and written versions
-                            available. Create your own, stunning website.</strong>
-                    </p>
-
-                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/"
-                        class="btn btn-outline-white btn-lg">Start free tutorial
-                        <i class="fas fa-graduation-cap ms-2"></i>
-                    </a>
                 </div>
             </div>
             <div class="carousel-item">
@@ -105,23 +33,8 @@
                 <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
                 <div class="carousel-caption d-none d-md-block mb-5">
                     <h1 class="mb-4">
-                        <strong>Learn Bootstrap 5 with MDB</strong>
+                        <strong>Awesome products</strong>
                     </h1>
-
-                    <p>
-                        <strong>Best & free guide of responsive web design</strong>
-                    </p>
-
-                    <p class="mb-4 d-none d-md-block">
-                        <strong>The most comprehensive tutorial for the Bootstrap 5. Loved by over 3 000 000 users. Video
-                            and written versions
-                            available. Create your own, stunning website.</strong>
-                    </p>
-
-                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/"
-                        class="btn btn-outline-white btn-lg">Start free tutorial
-                        <i class="fas fa-graduation-cap ms-2"></i>
-                    </a>
                 </div>
             </div>
             <div class="carousel-item">
@@ -130,27 +43,12 @@
                 <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
                 <div class="carousel-caption d-none d-md-block mb-5">
                     <h1 class="mb-4">
-                        <strong>Learn Bootstrap 5 with MDB</strong>
+                        <strong>New products every week</strong>
                     </h1>
-
-                    <p>
-                        <strong>Best & free guide of responsive web design</strong>
-                    </p>
-
-                    <p class="mb-4 d-none d-md-block">
-                        <strong>The most comprehensive tutorial for the Bootstrap 5. Loved by over 3 000 000 users. Video
-                            and written versions
-                            available. Create your own, stunning website.</strong>
-                    </p>
-
-                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/"
-                        class="btn btn-outline-white btn-lg">Start free tutorial
-                        <i class="fas fa-graduation-cap ms-2"></i>
-                    </a>
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleCaptions"
+        {{-- <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleCaptions"
             data-mdb-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -158,327 +56,157 @@
         <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleCaptions"
             data-mdb-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+            <span class="visually-hidden">next</span>
+        </button> --}}
     </div>
 
-    <!--Main layout-->
-    <main>
-        <div class="container">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2" style="background-color: #607D8B">
-                <!-- Container wrapper -->
-                <div class="container-fluid">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2" style="background-color: #607D8B">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
 
-                    <!-- Navbar brand -->
-                    <a class="navbar-brand" href="#">Categories:</a>
+            <!-- Navbar brand -->
+            <span class="navbar-brand">Categories:</span>
 
-                    <!-- Toggle button -->
-                    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                        data-mdb-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
 
-                    <!-- Collapsible wrapper -->
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </button>
 
-                            <!-- Link -->
-                            <li class="nav-item acitve">
-                                <a class="nav-link text-white" href="#">All</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="#">Shirts</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="#">Sport wears</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="#">Outwears</a>
-                            </li>
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                        </ul>
+                    <!-- Link -->
 
-                        <!-- Search -->
-                        <form class="w-auto py-1" style="max-width: 12rem">
-                            <input type="search" class="form-control rounded-0" placeholder="Search"
-                                aria-label="Search">
+                    <li class="nav-item">
+                        <form>
+                            <input class="d-none" type="number" value="" name="search">
+
+
+                            <button class="btn nav-link text-white mx-2 my-2 shadow-none" type="submit">All</button>
                         </form>
-
-                    </div>
-                </div>
-                <!-- Container wrapper -->
-            </nav>
-            <!-- Navbar -->
-
-            <!-- Products -->
-            <section>
-                <div class="text-center">
-                    <div class="row">
-
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card">
-                                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                                    data-mdb-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"
-                                        class="w-100" />
-                                    <a href="#!">
-                                        <div class="mask">
-                                            <div class="d-flex justify-content-start align-items-end h-100">
-                                                <h5><span class="badge bg-dark ms-2">NEW</span></h5>
-                                            </div>
-                                        </div>
-                                        <div class="hover-overlay">
-                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <a href="" class="text-reset">
-                                        <h5 class="card-title mb-2">Denim shirt</h5>
-                                    </a>
-                                    <a href="" class="text-reset ">
-                                        <p>Shirt</p>
-                                    </a>
-                                    <h6 class="mb-3 price">120$</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card">
-                                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                                    data-mdb-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg"
-                                        class="w-100" />
-                                    <a href="#!">
-                                        <div class="mask">
-                                            <div class="d-flex justify-content-start align-items-end h-100">
-                                                <h5><span class="badge bg-primary ms-2">bestseller</span></h5>
-                                            </div>
-                                        </div>
-                                        <div class="hover-overlay">
-                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <a href="" class="text-reset">
-                                        <h5 class="card-title mb-2">Sweatshirt</h5>
-                                    </a>
-                                    <a href="" class="text-reset ">
-                                        <p>Sport wear</p>
-                                    </a>
-                                    <h6 class="mb-3 price">139$</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card">
-                                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                                    data-mdb-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg"
-                                        class="w-100" />
-                                    <a href="#!">
-                                        <div class="hover-overlay">
-                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <a href="" class="text-reset">
-                                        <h5 class="card-title mb-2">Grey blouse</h5>
-                                    </a>
-                                    <a href="" class="text-reset ">
-                                        <p>Sport wear</p>
-                                    </a>
-                                    <h6 class="mb-3 price">99$</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card">
-                                <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15.jpg"
-                                        class="w-100" />
-                                    <a href="#!">
-                                        <div class="mask">
-                                            <div class="d-flex justify-content-start align-items-end h-100">
-                                                <h5><span class="badge sale-badge ms-2">-10%</span></h5>
-                                            </div>
-                                        </div>
-                                        <div class="hover-overlay">
-                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <a href="" class="text-reset">
-                                        <h5 class="card-title mb-2">Black jacket</h5>
-                                    </a>
-                                    <a href="" class="text-reset ">
-                                        <p>Outwear</p>
-                                    </a>
-                                    <h6 class="mb-3 price">
-                                        <s>199$</s><strong class="ms-2 sale">179$</strong>
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card">
-                                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                                    data-mdb-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg"
-                                        class="w-100" />
-                                    <a href="#!">
-                                        <div class="hover-overlay">
-                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <a href="" class="text-reset">
-                                        <h5 class="card-title mb-2">Sweatshirt</h5>
-                                    </a>
-                                    <a href="" class="text-reset ">
-                                        <p>Sport wear</p>
-                                    </a>
-                                    <h6 class="mb-3 price">139$</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card">
-                                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                                    data-mdb-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg"
-                                        class="w-100" />
-                                    <a href="#!">
-                                        <div class="mask">
-                                            <div class="d-flex justify-content-start align-items-end h-100">
-                                                <h5><span class="badge bg-success ms-2">Eco</span></h5>
-                                            </div>
-                                        </div>
-                                        <div class="hover-overlay">
-                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <a href="" class="text-reset">
-                                        <h5 class="card-title mb-2">Grey blouse</h5>
-                                    </a>
-                                    <a href="" class="text-reset ">
-                                        <p>Sport wear</p>
-                                    </a>
-                                    <h6 class="mb-3 price">99$</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card">
-                                <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15.jpg"
-                                        class="w-100" />
-                                    <a href="#!">
-                                        <div class="hover-overlay">
-                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <a href="" class="text-reset">
-                                        <h5 class="card-title mb-2">Black jacket</h5>
-                                    </a>
-                                    <a href="" class="text-reset">
-                                        <p>Outwear</p>
-                                    </a>
-                                    <h6 class="mb-3 price">199$</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card">
-                                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                                    data-mdb-ripple-color="light">
-                                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"
-                                        class="w-100" />
-                                    <a href="#!">
-                                        <div class="hover-overlay">
-                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body">
-                                    <a href="" class="text-reset">
-                                        <h5 class="card-title mb-2">Denim shirt</h5>
-                                    </a>
-                                    <a href="" class="text-reset ">
-                                        <p>Shirt</p>
-                                    </a>
-                                    <h6 class="mb-3 price">120$</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Pagination -->
-            <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+                    @if ($categories->count())
+                        @foreach ($categories as $category)
+                            {{-- <form class="form-inline my-2 my-lg-0 d-flex">
+
+
+                                <input class="form-control mr-sm-2 mx-2 form-control-sm" type="number"
+                                    value="{{ $category->id }}" name="search">
+                                <button class="btn nav-link text-white mx-2 my-2 shadow-none"
+                                    type="submit">{{ $category->name }}</button>
+
+
+                            </form> --}}
+
+                            <li class="nav-item">
+                                <form>
+                                    <input class="d-none" type="number" value="{{ $category->id }}" name="category">
+
+                                    <button class="btn nav-link text-white mx-2 my-2 shadow-none"
+                                        type="submit">{{ $category->name }}</button>
+                                </form>
+                            </li>
+                        @endforeach
+                    @else
+                        <li class="nav-item">
+                            <button class="btn nav-link text-white shadow-none">
+                                No hay categorias para mostrar
+                            </button>
+                        </li>
+                    @endif
+
+
                 </ul>
-            </nav>
-            <!-- Pagination -->
-        </div>
-    </main>
-    <!--Main layout-->
 
-    <footer class="text-center text-white mt-4" style="background-color: #607D8B">
+                <!-- Search -->
+                <form class="form-inline my-2 my-lg-0 d-flex">
+
+
+                    <input class="form-control mr-sm-2 mx-2 form-control-sm" type="search" name="search"
+                        placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline text-white my-2 my-sm-0" type="submit">Search</button>
+
+                </form>
+
+
+            </div>
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <div class="container">
+
+
+        <!-- Products -->
+        <section>
+            <div class="text-center">
+                <div class="row">
+                    @if ($products->count())
+                        @foreach ($products as $product)
+                            <div class="col-lg-3 col-md-6 mb-4">
+
+                                <div class="card w-100 h-100">
+                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                                        data-mdb-ripple-color="light">
+                                        <img class="w-100" src={{ asset('storage/images/' . $product->image) }} />
+                                        <a href="{{ route('product.show', $product) }}">
+                                            <div class="mask">
+                                                <div class="d-flex justify-content-start align-items-end h-100">
+                                                    <h5><span class="badge bg-dark ms-2">NEW</span></h5>
+                                                </div>
+                                            </div>
+                                            <div class="hover-overlay">
+                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
+                                                </div>
+                                            </div>
+                                            {{ $product->category->name }}
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <span class="text-reset">
+                                            <h5 class="card-title mb-2">{{ $product->title }} </h5>
+                                        </span>
+                                        {{-- <span class="text-reset overflow-auto">
+                                        <p>{{ $product->description }}</p>
+                                    </span> --}}
+
+
+                                    </div>
+                                    <div class="card-footer p-0 bg-white border-0  ">
+                                        <h6 class="mb-3 price">{{ $product->price }}$</h6>
+
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <h1>
+                            No hay productos para mostrar en el momento
+                        </h1>
+                    @endif
+                </div>
+
+
+            </div>
+        </section>
+
+
+        <!-- Pagination -->
+        {{ $products->links('pagination::bootstrap-5') }}
+        <!-- Pagination -->
+    </div>
+    <footer class="text-center text-white w-100" style="background-color: #607D8B;">
 
         <!--Call to action-->
         <div class="pt-4 pb-2">
-            <a class="btn btn-outline-white footer-cta mx-2"
-                href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank"
-                role="button">Download MDB
-                <i class="fas fa-download ms-2"></i>
+            <a class="btn btn-outline-white footer-cta mx-2"> <i class="fas fa-download ms-2"></i>
             </a>
-            <a class="btn btn-outline-white footer-cta mx-2" href="https://mdbootstrap.com/education/bootstrap/"
-                target="_blank" role="button">Start free tutorial
+            <a class="btn btn-outline-white footer-cta mx-2">
                 <i class="fas fa-graduation-cap ms-2"></i>
             </a>
         </div>
@@ -519,9 +247,10 @@
 
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); text-color: #E0E0E0">
-            © 2022 Copyright:
-            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            © 2023 Copyright:
+            <a class="text-white" href="https://github.com/carlosdiaztl">https://github.com/carlosdiaztl.com</a>
         </div>
         <!-- Copyright -->
-    </footer> --}}
+    </footer>
+    <!--Main layout-->
 @endsection

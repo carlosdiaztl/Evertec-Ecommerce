@@ -23,7 +23,9 @@
     <!--Main Navigation-->
     <header>
         <!-- Sidebar -->
-        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+        <nav id="sidebarMenu"
+            class="{{ auth() && auth()->user() ? 'collapse d-lg-block sidebar collapse bg-white' : 'd-none' }}">
+
             <div class="position-sticky">
                 <div class="list-group list-group-flush mx-3 mt-4">
                     @inject('role', 'App\Services\Roles')
@@ -41,7 +43,21 @@
                             class="list-group-item list-group-item-action py-2 ripple"><i
                                 class="fas fa-users fa-fw me-3"></i><span>Users</span></a>
                     @endcan
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
+                    @can('admin.products.index')
+                        <a href="{{ route('admin.products.index') }}"
+                            class="list-group-item list-group-item-action py-2 ripple"><i
+                                class="fas fa-store fa-fw me-3"></i><span>Products</span></a>
+                    @else
+                        <a href="{{ route('home') }}" class="list-group-item list-group-item-action py-2 ripple"><i
+                                class="fas fa-store fa-fw me-3"></i><span>Products</span></a>
+                    @endcan
+                    @if (auth() && auth()->user())
+                        <a href="{{ route('user.edit', auth()->user()->id) }}"
+                            class="list-group-item list-group-item-action py-2 ripple "><i
+                                class="fas fa-user fa-fw me-3"></i><span>Profile</span></a>
+                    @endif
+
+                    {{-- <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
                             class="fas fa-lock fa-fw me-3"></i><span>Password</span></a>
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
                             class="fas fa-chart-line fa-fw me-3"></i><span>Analytics</span></a>
@@ -58,7 +74,7 @@
                             class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span></a>
 
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-                            class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a>
+                            class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a> --}}
                 </div>
             </div>
         </nav>
@@ -75,16 +91,16 @@
                 </button>
 
                 <!-- Brand -->
-                <a class="navbar-brand" href="#">
+                <span class="navbar-brand">
                     <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="25"
                         alt="" loading="lazy" />
-                </a>
+                </span>
                 <!-- Search form -->
-                <form class="d-none d-md-flex input-group w-auto my-auto">
+                {{-- <form class="d-none d-md-flex input-group w-auto my-auto">
                     <input autocomplete="off" type="search" class="form-control rounded"
                         placeholder='Search (ctrl + "/" to focus)' style="min-width: 225px" />
                     <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
-                </form>
+                </form> --}}
 
                 <!-- Right links -->
                 <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -104,23 +120,17 @@
                         </ul>
                     </li>
 
-                    <!-- Icon -->
-                    <li class="nav-item">
-                        <a class="nav-link me-3 me-lg-0" href="#">
-                            <i class="fas fa-fill-drip"></i>
-                        </a>
-                    </li>
-                    <!-- Icon -->
+
                     <li class="nav-item me-3 me-lg-0">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="https://github.com/carlosdiaztl/carlosdiaztl">
                             <i class="fab fa-github"></i>
                         </a>
                     </li>
 
                     <!-- Icon dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#"
-                            id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdown"
+                            role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                             <i class="united kingdom flag m-0"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -131,30 +141,11 @@
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="poland flag"></i>Polski</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="china flag"></i>中文</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="japan flag"></i>日本語</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="germany flag"></i>Deutsch</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="france flag"></i>Français</a>
-                            </li>
+
                             <li>
                                 <a class="dropdown-item" href="#"><i class="spain flag"></i>Español</a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="russia flag"></i>Русский</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="portugal flag"></i>Português</a>
-                            </li>
+
                         </ul>
                     </li>
 
@@ -163,8 +154,13 @@
                         <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
                             id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
                             aria-expanded="false">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
-                                height="22" alt="" loading="lazy" />
+                            @if (auth() && auth()->user())
+                                <img src="{{ asset(auth()->user()->image) }}" class="rounded-circle" height="22"
+                                    alt="" loading="lazy" />
+                            @else
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                                    class="rounded-circle" height="22" alt="" loading="lazy" />
+                            @endif
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                             @guest
@@ -216,9 +212,30 @@
     <!--Main Navigation-->
 
     <!--Main layout-->
-    <main class="py-4 mt-5">
+    <main class="{{ auth() && auth()->user() ? 'mt-5 pt-3 sidebarauth' : 'mt-5 pt-3' }}">
 
         @yield('content')
+        @if (isset($errors) && $errors->any())
+            <div class="container text-center">
+
+
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                })
+            </script>
+        @endif
     </main>
     <!--Main layout-->
     <!-- MDB -->
@@ -241,22 +258,6 @@
     </script>
 @endif
 
-@if (isset($errors) && $errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
 
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
-        })
-    </script>
-@endif
 
 </html>

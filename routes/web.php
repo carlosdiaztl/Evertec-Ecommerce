@@ -3,8 +3,8 @@
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\AdminUserController;
-
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [MainController::class, 'index'])->name('welcome');
+Route::get('/product/{product}', [MainController::class, 'show'])->name('product.show');
 
 // lmipiar cache
 Route::get('/cache', function () {

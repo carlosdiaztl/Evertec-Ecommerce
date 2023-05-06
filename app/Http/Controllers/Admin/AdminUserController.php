@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\facades\Excel;
 use App\Exports\UsersExport;
 use App\Http\Requests\Admin\AdminUserFormRequest;
+use App\Http\Requests\Admin\yyAdminUserFormRequest;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Support\Facades\Hash;
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->unsignedBigInteger('stock');
             $table->enum('status', ['available', 'unavailable',])->default('available');
-            $table->decimal('price', 8, 2);
+            $table->unsignedBigInteger('price');
             $table->string('image');
             $table->timestamps();
         });

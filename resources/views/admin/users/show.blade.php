@@ -1,40 +1,71 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        <h1>User Info</h1>
+        <div class="card mb-4">
 
 
-        <div class="card text-center">
-            {{-- @dd($user) --}}
-            <div class="card-header">
-                {{ $user->name }}
-            </div>
+
             <div class="card-body">
-                <p class="card-text">
-                    Email:
-                    {{ $user->email }}
-                </p>
-                <p class="card-text">
-                    current satus:
-                    {{ $user->status }}
-                </p>
+                <div class="d-flex align-items-start align-items-sm-center gap-4">
+                    {{-- @dd(asset('storage/images/' . $user->image)) --}}
+                    <img src="{{ asset($user->image) }}" alt="user-avatar" width="200px" height="350px"
+                        class="d-block w-px-100 h-px-100 rounded" />
+
+                </div>
+            </div>
+
+
+            <!-- Account -->
+
+            <div class="card-body">
 
             </div>
-            <div class="card-footer">
-                <form method="POST" action="{{ route('admin.users.update', $user) }}">
-                    @csrf
-                    @method('PUT')
-                    <div>
+            <hr class="my-0" />
+            <div class="card-body">
 
-                        <input type="text" class="d-none" name="status"
-                            value="{{ $user->status == 'active' ? 'inactive' : 'active' }}" placeholder="" readonly>
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input readonly class="form-control" type="text" name="firstName" value="{{ $user->name }}"
+                            autofocus />
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input readonly class="form-control" type="text" name="lastName" value="{{ $user->lastName }}" />
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input readonly class="form-control" type="text" name="email" value="{{ $user->email }}"
+                            placeholder="{{ $user->email }}" />
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="identification" class="form-label">Identification</label>
+                        <input readonly type="text" class="form-control" name="identification"
+                            value="{{ $user->identification }}" />
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label" for="phoneNumber">Phone Number</label>
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text">Col(+57) </span>
+                            <input readonly type="text" name="phoneNumber" class="form-control"
+                                value="{{ $user->phone }}" />
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="address" class="form-label">Address</label>
+                        <input readonly type="text" class="form-control" name="address" value="{{ $user->address }}" />
                     </div>
 
+                </div>
 
-                    <button type="submit"
-                        class="btn btn-{{ $user->status == 'active' ? 'danger' : 'success' }}">{{ $user->status == 'active' ? 'Inactivar' : 'Activar' }}
-                    </button>
-                </form>
+
             </div>
+
+
+            <!-- /Account -->
         </div>
+
+
     </div>
 @endsection

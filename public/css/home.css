@@ -1,5 +1,5 @@
 .carousel-item {
-    height: 50vh;
+    height: 35vh;
 }
 .card {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -22,4 +22,9 @@
 
 .sale-badge {
     background-color: #e53935;
+}
+
+.card .bg-image img {
+    height: 320px !important;
+    max-height: 320px !important;
 }

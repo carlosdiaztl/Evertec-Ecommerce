@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/product.css') }}">
 @endsection
 @section('content')
     <!--Main layout-->
@@ -78,7 +79,7 @@
 
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {{-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                     <!-- Link -->
                     <li class="nav-item">
@@ -99,7 +100,7 @@
                     @endif
 
 
-                </ul>
+                </ul> --}}
 
                 <!-- Search -->
                 <form class="w-auto py-1" style="max-width: 15rem">
@@ -112,64 +113,96 @@
     </nav>
     <!-- Navbar -->
     <div class="container">
-
-
-        <!-- Products -->
-        <section>
-            <div class="text-center">
-                <div class="row">
-                    @if ($products->count())
-                        @foreach ($products as $product)
-                            <div class="col-lg-3 col-md-6 mb-4">
-                                {{-- <a href="{{ route('') }}"></a> --}}
-                                <div class="card w-100 h-100">
-                                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                                        data-mdb-ripple-color="light">
-                                        <img class="w-100" src={{ asset('storage/images/' . $product->image) }} />
-                                        <a href="#!">
-                                            <div class="mask">
-                                                <div class="d-flex justify-content-start align-items-end h-100">
-                                                    <h5><span class="badge bg-dark ms-2">NEW</span></h5>
-                                                </div>
-                                            </div>
-                                            <div class="hover-overlay">
-                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                                </div>
-                                            </div>
-                                            {{ $product->category->name }}
-                                        </a>
-                                    </div>
-                                    <div class="card-body">
-                                        <span class="text-reset">
-                                            <h5 class="card-title mb-2">{{ $product->title }} </h5>
-                                        </span>
-                                        {{-- <span class="text-reset overflow-auto">
-                                        <p>{{ $product->description }}</p>
-                                    </span> --}}
-
-
-                                    </div>
-                                    <div class="card-footer p-0 bg-white border-0  ">
-                                        <h6 class="mb-3 price">{{ $product->price }}$</h6>
-
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @else
-                        <h1>
-                            No hay productos para mostrar en el momento
-                        </h1>
-                    @endif
-                </div>
-
-
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+                <img src={{ asset('storage/images/' . $product->image) }} class="img-fluid" alt="" />
             </div>
-        </section>
+            <!--Grid column-->
 
-        <!-- Pagination -->
-        {{ $products->links('pagination::bootstrap-5') }}
-        <!-- Pagination -->
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+                <!--Content-->
+                <div class="p-4">
+                    <div class="mb-3">
+                        <a href="">
+                            <span class="badge bg-dark me-1">Category {{ $product->category_id }} </span>
+                        </a>
+                        <a href="">
+                            <span class="badge bg-info me-1">New</span>
+                        </a>
+                        <a href="">
+                            <span class="badge bg-danger me-1">Bestseller</span>
+                        </a>
+                    </div>
+
+                    <p class="lead">
+
+                        <span>{{ $product->price }}$ </span>
+                    </p>
+
+                    <strong>
+                        <p style="font-size: 20px;">Description</p>
+                    </strong>
+
+                    <p>{{ $product->description }} </p>
+
+                    <form class="d-flex justify-content-left">
+                        <!-- Default input -->
+                        <div class="form-outline me-1" style="width: 100px;">
+                            <input type="number" value="1" class="form-control" />
+                        </div>
+                        <button class="btn btn-primary ms-1" type="submit">
+                            Add to cart
+                            <i class="fas fa-shopping-cart ms-1"></i>
+                        </button>
+                    </form>
+                </div>
+                <!--Content-->
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+        <hr />
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center">
+            <!--Grid column-->
+            <div class="col-md-6 text-center">
+                <h4 class="my-4 h4">Additional information</h4>
+
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
+                    voluptates, quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.
+                </p>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            @if ($firstThreeProducts->count())
+                @foreach ($firstThreeProducts as $productx)
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <img src={{ asset('storage/images/' . $productx->image) }} class="img-fluid" alt="" />
+                    </div>
+                @endforeach
+
+
+                <!--Grid column-->
+            @else
+                <div class="col-lg-4 col-md-12 mb-4">
+                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid"
+                        alt="" />
+                </div>
+            @endif
+        </div>
+
+        <!-- Product -->
+
+
     </div>
     <footer class="text-center text-white w-100" style="background-color: #607D8B;">
 
