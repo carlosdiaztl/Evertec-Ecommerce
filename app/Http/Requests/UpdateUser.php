@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUser extends FormRequest
 {
@@ -22,7 +22,7 @@ class UpdateUser extends FormRequest
      */
     public function rules(): array
     {
-        // aqui se ponen las validaciondes del controlador 
+        // aqui se ponen las validaciondes del controlador
         return [
             'password' => ['string', 'min:8', 'confirmed'],
             'name' => ['string', 'max:200', 'regex:/^[a-zA-Z\s]+$/'],
@@ -36,6 +36,7 @@ class UpdateUser extends FormRequest
             //
         ];
     }
+
     public function messages()
     {
         return [

@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Admin\users;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Http\Controllers\Admin\AdminUserController;
+use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Tests\TestCase;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Http\Controllers\Admin\AdminUserController;
 
 class UsersControllerTest extends TestCase
 {
@@ -16,12 +16,13 @@ class UsersControllerTest extends TestCase
      * A basic feature test example.
      */
     use RefreshDatabase;
-    public function  testIndex_Admin_search()
+
+    public function testIndex_Admin_search()
     {
         User::factory()->create([
             'name' => 'Carlos enrique d ',
             'email' => 'carlosd@hotmail.com',
-            'password' => bcrypt('car123456')
+            'password' => bcrypt('car123456'),
         ]);
         $request = new Request(['search' => 'Carlos']);
         $controller = new AdminUserController();
@@ -32,9 +33,10 @@ class UsersControllerTest extends TestCase
             return str_contains($user->name, $request->query('search'));
         }));
     }
+
     public function test_admin_edit_userpassword()
     {
-        $role1 =  Role::create(['name' => 'Admin']);
+        $role1 = Role::create(['name' => 'Admin']);
         Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
         Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
         $user = User::factory()->create()->assignRole('Admin');

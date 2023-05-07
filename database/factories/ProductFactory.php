@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             'image' => fake()->image(storage_path('app/public/images'), 250, 300, 'products', null),
             'category_id' => function () {
                 return Category::inRandomOrder()->first()->id;
-            }
+            },
 
             //
         ];

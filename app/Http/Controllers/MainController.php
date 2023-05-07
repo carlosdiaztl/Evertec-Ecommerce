@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-
     public function index(Request $request)
     {
         $query = $request->input('search');
@@ -31,6 +30,7 @@ class MainController extends Controller
 
         return view('welcome', compact('products', 'categories'));
     }
+
     public function show(Product $product)
     {
         $firstThreeProducts = Product::available()->take(3)->get();

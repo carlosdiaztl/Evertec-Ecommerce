@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -26,6 +26,7 @@ class HomeController extends Controller
     {
         $products = Product::available()->paginate(8);
         $categories = Category::all();
+
         return view('home', compact('products', 'categories'));
     }
 }

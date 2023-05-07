@@ -33,6 +33,7 @@ class AdminProductUpdate extends FormRequest
             $rules['image'] = ['required', 'image', 'mimes:jpeg,png', 'max:2000'];
         }
     }
+
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {

@@ -21,6 +21,7 @@ class CheckUserAccess
             $content = '<div style="background-color: #F44336; color: white; padding: 10px;">
             <h1>403 THIS ACTION IS UNAUTHORIZED.
                 </h1> </div>';
+
             return response($content, Response::HTTP_UNAUTHORIZED);
         }
 

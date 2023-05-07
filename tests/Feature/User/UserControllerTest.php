@@ -2,10 +2,8 @@
 
 namespace Tests\Feature\User;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class UserControllerTest extends TestCase
 {
@@ -19,6 +17,7 @@ class UserControllerTest extends TestCase
         $response = $this->actingAs($user)->get(route('user.edit', $user));
         $response->assertStatus(200);
     }
+
     public function test_user_cant_access_otherProfile(): void
     {
         $user = User::factory()->create();

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Product;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\Product\AdminProductStore;
 use App\Http\Requests\Admin\Product\AdminProductUpdate;
-use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends Controller
 {
@@ -49,8 +48,9 @@ class AdminProductController extends Controller
             'description' => $request['description'],
             'status' => $request['status'],
             'price' => $request['price'],
-            'stock' => $request['stock']
+            'stock' => $request['stock'],
         ]);
+
         return redirect()->back()->withSuccess('Producto creado ');
 
         //
@@ -71,6 +71,7 @@ class AdminProductController extends Controller
     {
         $categories = Category::all();
         $statuses = Product::distinct()->pluck('status');
+
         return view('admin.products.edit', compact('product', 'categories', 'statuses'));
         //
     }
@@ -80,7 +81,7 @@ class AdminProductController extends Controller
      */
     public function update(AdminProductUpdate $request, Product $product)
     {
-        if ($request->hasFile('image') &&  ($request['image'] != $product->image)) {
+        if ($request->hasFile('image') && ($request['image'] != $product->image)) {
             // dd($product->image);
             Storage::delete('public/images' . $product->image);
             $path = $request['image']->store('public/images');
@@ -92,11 +93,13 @@ class AdminProductController extends Controller
                 'status' => $request['status'],
                 'category_id' => $request['category_id'],
                 'stock' => $request['stock'],
-                'price' => $request['price']
+                'price' => $request['price'],
             ]);
+
             return redirect()->route('admin.products.index')->withSuccess('Producto actualizado. ');
         }
         $product->update($request->validated());
+
         return redirect()->route('admin.products.index')->withSuccess('Producto actualizado ');
         // dd($request);
         //

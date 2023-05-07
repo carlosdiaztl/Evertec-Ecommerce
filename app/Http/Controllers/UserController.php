@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Middleware\CheckUserAccess;
 use App\Http\Requests\UpdateUser;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Middleware\CheckUserAccess;
 
 class UserController extends Controller
 {
@@ -15,6 +14,7 @@ class UserController extends Controller
 
         $this->middleware(CheckUserAccess::class . ':user');
     }
+
     //
     public function edit(User $user)
     {
@@ -31,13 +31,14 @@ class UserController extends Controller
 
             $user->update(
                 [
-                    'password' =>  Hash::make($request->password)
+                    'password' => Hash::make($request->password),
                 ]
             );
+
             return redirect()->back()->withSuccess("Clave modificada con exito ");
         }
         if ($request->has('image')) {
-            // fasat storage storage para buscar el patch de la imagen actual y borrarla 
+            // fasat storage storage para buscar el patch de la imagen actual y borrarla
 
 
 
@@ -45,9 +46,10 @@ class UserController extends Controller
             $newpath = str_replace("public", "storage", $path);
             $user->update(
                 [
-                    'image' =>  $newpath
+                    'image' => $newpath,
                 ]
             );
+
             return redirect()->back()->withSuccess("Imagen actualizada con exito ");
         }
 
@@ -59,6 +61,7 @@ class UserController extends Controller
             $user->update($request->all());
         }
         $user->update($request->all());
+
         return redirect()->back()->withSuccess("Usuario editado con exito");
     }
 }

@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminHomeController;
-use App\Http\Controllers\Admin\AdminProductController;
-use App\Http\Controllers\Admin\AdminUserController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\AdminHomeController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,12 +34,12 @@ Route::get('/cache', function () {
     dd('cache clear');
 });
 
-// verificcion en rutas auth 
+// verificcion en rutas auth
 Auth::routes(['verify' => true]);
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware('verified',)->group(function () {
+    Route::middleware('verified', )->group(function () {
         Route::resource('users', AdminUserController::class)->names('users')->except('store')->middleware(['can:admin.users.index', 'can:admin.users.edit']);
         Route::resource('products', AdminProductController::class)->names('products')->middleware('can:admin.products.index');
         Route::get('/home', [AdminHomeController::class, 'index'])->name('home');

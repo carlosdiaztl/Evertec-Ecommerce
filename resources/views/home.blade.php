@@ -81,13 +81,35 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                     <!-- Link -->
+
                     <li class="nav-item">
-                        <button class="btn nav-link text-white mx-2 my-2 shadow-none">All</button>
+                        <form>
+                            <input class="d-none" type="number" value="" name="search">
+
+
+                            <button class="btn nav-link text-white mx-2 my-2 shadow-none" type="submit">All</button>
+                        </form>
                     </li>
                     @if ($categories->count())
                         @foreach ($categories as $category)
+                            {{-- <form class="form-inline my-2 my-lg-0 d-flex">
+
+
+                                <input class="form-control mr-sm-2 mx-2 form-control-sm" type="number"
+                                    value="{{ $category->id }}" name="search">
+                                <button class="btn nav-link text-white mx-2 my-2 shadow-none"
+                                    type="submit">{{ $category->name }}</button>
+
+
+                            </form> --}}
+
                             <li class="nav-item">
-                                <button class="btn nav-link text-white mx-2 my-2 shadow-none">{{ $category->name }}</button>
+                                <form>
+                                    <input class="d-none" type="number" value="{{ $category->id }}" name="category">
+
+                                    <button class="btn nav-link text-white mx-2 my-2 shadow-none"
+                                        type="submit">{{ $category->name }}</button>
+                                </form>
                             </li>
                         @endforeach
                     @else
@@ -102,9 +124,15 @@
                 </ul>
 
                 <!-- Search -->
-                <form class="w-auto py-1" style="max-width: 15rem">
-                    <input type="search" class="form-control rounded-0" placeholder="Search" aria-label="Search">
+                <form class="form-inline my-2 my-lg-0 d-flex">
+
+
+                    <input class="form-control mr-sm-2 mx-2 form-control-sm" type="search" name="search"
+                        placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline text-white my-2 my-sm-0" type="submit">Search</button>
+
                 </form>
+
 
             </div>
         </div>
@@ -121,12 +149,12 @@
                     @if ($products->count())
                         @foreach ($products as $product)
                             <div class="col-lg-3 col-md-6 mb-4">
-                                {{-- <a href="{{ route('') }}"></a> --}}
+
                                 <div class="card w-100 h-100">
                                     <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                                         data-mdb-ripple-color="light">
                                         <img class="w-100" src={{ asset('storage/images/' . $product->image) }} />
-                                        <a href="#!">
+                                        <a href="{{ route('product.show', $product) }}">
                                             <div class="mask">
                                                 <div class="d-flex justify-content-start align-items-end h-100">
                                                     <h5><span class="badge bg-dark ms-2">NEW</span></h5>
@@ -166,6 +194,7 @@
 
             </div>
         </section>
+
 
         <!-- Pagination -->
         {{ $products->links('pagination::bootstrap-5') }}
