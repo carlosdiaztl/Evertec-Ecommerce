@@ -50,7 +50,8 @@ jobs:
         run: chmod -R 755 storage
       - name: comando de permisos
         run: chmod -R 777 /home/runner/work/Evertec-Ecommerce/Evertec-Ecommerce/storage/app/public/images
-
+      - name: psr12 syntax
+        run: vendor/bin/php-cs-fixer fix
       # Test solo en maquina local
       - name: Laravel Test
         run: php artisan test
