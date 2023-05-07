@@ -79,30 +79,7 @@
 
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-                {{-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                    <!-- Link -->
-                    <li class="nav-item">
-                        <button class="btn nav-link text-white mx-2 my-2 shadow-none">All</button>
-                    </li>
-                    @if ($categories->count())
-                        @foreach ($categories as $category)
-                            <li class="nav-item">
-                                <button class="btn nav-link text-white mx-2 my-2 shadow-none">{{ $category->name }}</button>
-                            </li>
-                        @endforeach
-                    @else
-                        <li class="nav-item">
-                            <button class="btn nav-link text-white shadow-none">
-                                No hay categorias para mostrar
-                            </button>
-                        </li>
-                    @endif
-
-
-                </ul> --}}
-
-                <!-- Search -->
                 <form class="w-auto py-1" style="max-width: 15rem">
                     <input type="search" class="form-control rounded-0" placeholder="Search" aria-label="Search">
                 </form>

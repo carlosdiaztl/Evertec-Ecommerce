@@ -48,16 +48,7 @@
                 </div>
             </div>
         </div>
-        {{-- <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleCaptions"
-            data-mdb-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleCaptions"
-            data-mdb-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">next</span>
-        </button> --}}
+
     </div>
 
     <!-- Navbar -->
@@ -92,17 +83,6 @@
                     </li>
                     @if ($categories->count())
                         @foreach ($categories as $category)
-                            {{-- <form class="form-inline my-2 my-lg-0 d-flex">
-
-
-                                <input class="form-control mr-sm-2 mx-2 form-control-sm" type="number"
-                                    value="{{ $category->id }}" name="search">
-                                <button class="btn nav-link text-white mx-2 my-2 shadow-none"
-                                    type="submit">{{ $category->name }}</button>
-
-
-                            </form> --}}
-
                             <li class="nav-item">
                                 <form>
                                     <input class="d-none" type="number" value="{{ $category->id }}" name="category">
@@ -132,7 +112,6 @@
                     <button class="btn btn-outline text-white my-2 my-sm-0" type="submit">Search</button>
 
                 </form>
-
 
             </div>
         </div>
@@ -171,9 +150,7 @@
                                         <span class="text-reset">
                                             <h5 class="card-title mb-2">{{ $product->title }} </h5>
                                         </span>
-                                        {{-- <span class="text-reset overflow-auto">
-                                        <p>{{ $product->description }}</p>
-                                    </span> --}}
+
 
 
                                     </div>

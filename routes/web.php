@@ -39,7 +39,7 @@ Auth::routes(['verify' => true]);
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware('verified', )->group(function () {
+    Route::middleware('verified',)->group(function () {
         Route::resource('users', AdminUserController::class)->names('users')->except('store')->middleware(['can:admin.users.index', 'can:admin.users.edit']);
         Route::resource('products', AdminProductController::class)->names('products')->middleware('can:admin.products.index');
         Route::get('/home', [AdminHomeController::class, 'index'])->name('home');
@@ -53,7 +53,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::middleware('verified')->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [MainController::class, 'index'])->name('home');
     Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('user/{user}', [UserController::class, 'update'])->name('user.update');
 

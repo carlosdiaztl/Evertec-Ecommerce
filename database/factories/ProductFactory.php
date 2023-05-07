@@ -6,6 +6,8 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
+ * @method static \Illuminate\Database\Eloquent\Factories\Factory create(array $attributes = [])
+ *
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
 class ProductFactory extends Factory
@@ -19,8 +21,8 @@ class ProductFactory extends Factory
     {
         return [
             'title' => fake()->name('products'),
-            'description' => fake()->paragraph(),
-            'price' => fake()->randomFloat(2, 10, 1000),
+            'description' => fake()->paragraph(1),
+            'price' => fake()->numberBetween(10000, 50000),
             'stock' => fake()->numberBetween(1, 100),
             'status' => fake()->randomElement(['available', 'unavailable',]),
             'image' => fake()->image(storage_path('app/public/images'), 250, 300, 'products', null),

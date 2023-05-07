@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin\products;
 
+use App\Models\Product;
 use Tests\TestCase;
 use App\Models\User;
 use Spatie\Permission\Models\Role;

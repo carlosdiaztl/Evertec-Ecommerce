@@ -154,7 +154,7 @@
                         <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
                             id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
                             aria-expanded="false">
-                            @if (auth() && auth()->user()->image)
+                            @if (auth() && isset(auth()->user()->image))
                                 <img src="{{ asset(auth()->user()->image) }}" class="rounded-circle" height="22"
                                     alt="" loading="lazy" />
                             @else

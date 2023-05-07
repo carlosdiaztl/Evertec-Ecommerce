@@ -23,7 +23,7 @@ class AdminProductUpdate extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:200'],
-            'description' => ['required', 'string', 'max:200'],
+            'description' => ['required', 'string', 'max:250'],
             'status' => ['required', 'in:available,unavailable'],
             'category_id' => ['required', 'exists:categories,id'],
             'stock' => ['required', 'int', 'max:999999999'],
