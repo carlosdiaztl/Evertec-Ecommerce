@@ -30,7 +30,7 @@ class ProductsTest extends TestCase
             $response->assertSee($availableProduct->price);
         }
     }
-    public function test_user_cant_view_all_unavaliables_products(): void
+    public function test_user_cant_view_unavaliables_products(): void
     {
         Category::factory()->count(3)->create();
 
@@ -44,5 +44,43 @@ class ProductsTest extends TestCase
         foreach ($unavailableProducts as $unavailableProduct) {
             $response->assertDontSee($unavailableProduct->title);
         }
+    }
+    public function test_user_can_search_products(): void
+    {
+        Category::factory()->count(3)->create();
+        $availableProducts = Product::factory()->count(3)->create([
+            'status' => 'available',
+        ]);
+        $unavailableProducts = Product::factory()->count(3)->create([
+            'status' => 'unavailable',
+        ]);
+
+        // Hacer la petición con los parámetros de búsqueda
+        $response = $this->get(route('welcome', [
+            'search' => $availableProducts->first()->title, // Usar el título del primer producto disponible como criterio de búsqueda
+
+        ]));
+
+        // Verificar que se carguen correctamente los productos y la categoría
+        $response->assertSuccessful();
+        $response->assertViewHas('products');
+        $response->assertViewHas('categories');
+
+        // Verificar que se muestren los productos con los criterios de búsqueda
+        $response->assertSee($availableProducts->first()->title);
+        $response->assertSee($availableProducts->first()->image);
+        $response->assertSee($availableProducts->first()->price);
+        $response = $this->get(route('welcome', [
+            'search' => $unavailableProducts->first()->title, // Usar el título del primer producto no disponible como criterio de búsqueda
+
+        ]));
+
+        // Verificar que se carguen correctamente los productos y la categoría
+        $response->assertSuccessful();
+        $response->assertViewHas('products');
+        $response->assertViewHas('categories');
+        $response->assertDontSee($unavailableProducts->first()->title);
+        $response->assertDontSee($unavailableProducts->first()->image);
+        $response->assertDontSee($unavailableProducts->first()->price);
     }
 }

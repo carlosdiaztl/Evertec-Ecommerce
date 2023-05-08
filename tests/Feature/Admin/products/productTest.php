@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin\products;
 
+use App\Models\Category;
 use App\Models\Product;
 use Tests\TestCase;
 use App\Models\User;
@@ -25,15 +26,30 @@ class productTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_view_products_()
-    {
-    }
-
     public function test_route_products_users_cant_access(): void
     {
 
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/admin/products/index');
         $response->assertStatus(403);
+    }
+    public function test_view_products_()
+    {
+        $role1 = Role::create(['name' => 'Admin']);
+        Permission::create(['name' => 'admin.products.index'])->assignRole($role1);
+        $user = User::factory()->create()->assignRole('Admin');
+        Category::factory()->count(3)->create();
+        Product::factory()->count(7)->create();
+        $response = $this->actingAs($user)->get(route('admin.products.index'));
+        $products = Product::query()->paginate(10); // se obtienen los productos que se están mostrando en la vista
+        foreach ($products as $product) {
+            $response->assertSee($product->title);
+            $response->assertSee($product->image);
+            $response->assertSee($product->description);
+            $response->assertSee($product->price);
+            $response->assertSee($product->stock);
+            $response->assertSee($product->category->name);
+            $response->assertSee($product->status);
+        }
     }
 }
