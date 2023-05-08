@@ -16,7 +16,7 @@ class AdminProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(7);
+        $products = Product::query()->paginate(7);
 
         return view('admin.products.index', compact('products'));
         //
@@ -28,7 +28,7 @@ class AdminProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $statuses = Product::distinct()->pluck('status');
+        $statuses = Product::query()->distinct()->pluck('status');
         // dd($status);
         return view('admin.products.create', compact('categories', 'statuses'));
         //
@@ -41,7 +41,7 @@ class AdminProductController extends Controller
     {
         $path = $request['image']->store('public/images');
         $newpath = str_replace("public/images", "", $path);
-        Product::create([
+        $product = new Product([
             'title' => $request['title'],
             'image' => $newpath,
             'category_id' => $request['category_id'],
@@ -50,6 +50,7 @@ class AdminProductController extends Controller
             'price' => $request['price'],
             'stock' => $request['stock'],
         ]);
+        $product->save();
 
         return redirect()->back()->withSuccess('Producto creado ');
 
@@ -70,7 +71,7 @@ class AdminProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        $statuses = Product::distinct()->pluck('status');
+        $statuses = Product::query()->distinct()->pluck('status');
 
         return view('admin.products.edit', compact('product', 'categories', 'statuses'));
         //

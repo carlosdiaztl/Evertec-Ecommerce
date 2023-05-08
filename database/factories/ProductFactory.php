@@ -21,7 +21,7 @@ class ProductFactory extends Factory
     {
         return [
             'title' => fake()->name('products'),
-            'description' => fake()->paragraph(1),
+            'description' => fake()->paragraph(3),
             'price' => fake()->numberBetween(10000, 50000),
             'stock' => fake()->numberBetween(1, 100),
             'status' => fake()->randomElement(['available', 'unavailable',]),

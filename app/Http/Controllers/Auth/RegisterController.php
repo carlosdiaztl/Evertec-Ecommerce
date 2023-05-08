@@ -70,7 +70,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // dd($data['lastName']);
-        return User::create([
+        $user = new User([
             'lastName' => $data['lastName'],
             'name' => $data['name'],
             'email' => $data['email'],
@@ -79,5 +79,9 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->save();
+
+        return $user;
     }
 }

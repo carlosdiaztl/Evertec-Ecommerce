@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel\facades\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use App\Http\Requests\Admin\AdminUserFormRequest;
 
@@ -18,9 +18,10 @@ class AdminUserController extends Controller
     {
         DB::connection()->enableQueryLog();
         $search = $request->search;
-        $users = User::where('name', 'LIKE', '%' . $search . '%')->orWhere('email', 'LIKE', '%' . $search . '%')
+        $users = User::query()
+            ->where('name', 'LIKE', '%' . $search . '%')
+            ->orWhere('email', 'LIKE', '%' . $search . '%')
             ->paginate();
-
         return view('admin.users.index', compact('users'));
     }
 

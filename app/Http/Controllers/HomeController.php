@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::available()->paginate(8);
+        $products = Product::query()->available()->paginate(8);
         $categories = Category::all();
 
         return view('home', compact('products', 'categories'));

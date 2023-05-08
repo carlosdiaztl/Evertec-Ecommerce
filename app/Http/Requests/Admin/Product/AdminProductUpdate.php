@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AdminProductUpdate extends FormRequest
 {
+    private $status;
+    private $stock;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -36,6 +38,8 @@ class AdminProductUpdate extends FormRequest
 
     public function withValidator($validator)
     {
+        $this->status = $this->input('status');
+        $this->stock = $this->input('stock');
         $validator->after(function ($validator) {
             if ($this->status == 'available' && $this->stock == 0) {
                 $validator->errors()->add('stock', 'If available must have stock');

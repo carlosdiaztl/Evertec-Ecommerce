@@ -33,7 +33,7 @@ class MainController extends Controller
 
     public function show(Product $product)
     {
-        $firstThreeProducts = Product::available()->take(3)->get();
+        $firstThreeProducts = Product::query()->available()->take(3)->get();
 
         return view('products.show', compact('product', 'firstThreeProducts'));
     }
