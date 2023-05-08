@@ -14,6 +14,7 @@ class UsersExport implements FromView
     public function view(): View
     {
         $users = User::all();
+
         return view('admin.users.export-excel', compact('users'));
     }
 }

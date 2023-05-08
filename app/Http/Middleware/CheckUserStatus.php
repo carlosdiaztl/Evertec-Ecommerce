@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class CheckUserStatus
 {
@@ -18,6 +17,7 @@ class CheckUserStatus
 
         if (auth()->user() && auth()->user()->status === 'inactive') {
             auth()->logout();
+
             return redirect('/login')->withErrors('Tu cuenta está inactiva.');
         }
 

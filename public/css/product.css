@@ -1,0 +1,5 @@
+.img-fluid {
+    object-fit: contain;
+    max-width: 500px !important;
+    max-height: 400px !important;
+}

@@ -43,21 +43,7 @@
                                                     style="font-size: 24px;"></i></a>
                                             <a class="nav-link" href="{{ route('admin.users.edit', $user) }}"><i
                                                     class="ti ti-pencil" style="font-size: 24px;"></i></a>
-                                            {{-- <form method="POST" action="{{ route('admin.users.update', $user) }}">
-                                                @csrf
-                                                @method('PUT')
-                                                <div>
 
-                                                    <input type="text" class="d-none" name="status"
-                                                        value="{{ $user->status == 'active' ? 'inactive' : 'active' }}"
-                                                        placeholder="" readonly>
-                                                </div>
-
-
-                                                <button type="submit"
-                                                    class="btn btn-{{ $user->status == 'active' ? 'danger' : 'success' }}">{{ $user->status == 'active' ? 'Inactivar' : 'Activar' }}
-                                                </button>
-                                            </form> --}}
 
                                         </td>
                                     </tr>

@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-
 use Illuminate\Support\Str;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -23,6 +23,7 @@ class UserFactory extends Factory
         $imagePath = $faker->image(storage_path('app/public/images'), 400, 300, $category = "people", false, true, false);
         $filename = basename($imagePath);
         $path = 'storage/images/' . $filename;
+
         return [
             'name' => fake()->name(),
             'lastName' => fake()->lastName(),

@@ -26,7 +26,8 @@
                                     usuarios</a>
                             </li>
                             <li class="nav-item mt-2">
-                                <a class="btn btn-primary " href="#">Administar Productos </a>
+                                <a class="btn btn-primary " href="{{ route('admin.products.index') }}">Administar Productos
+                                </a>
                             </li>
 
                         </ul>
