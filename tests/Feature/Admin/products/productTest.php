@@ -22,7 +22,7 @@ class ProductTest extends TestCase
         $role1 = Role::create(['name' => 'Admin']);
         Permission::create(['name' => 'admin.products.index'])->assignRole($role1);
         $user = User::factory()->create()->assignRole('Admin');
-        $response = $this->actingAs($user)->get('/admin/products/index');
+        $response = $this->actingAs($user)->get(route('admin.categories.index'));
         $response->assertOk();
     }
 
@@ -30,7 +30,7 @@ class ProductTest extends TestCase
     {
 
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/admin/products/index');
+        $response = $this->actingAs($user)->get(route('admin.categories.index'));
         $response->assertStatus(403);
     }
     public function test_view_products_()
