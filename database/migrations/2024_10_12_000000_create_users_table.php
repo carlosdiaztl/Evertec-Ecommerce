@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -22,7 +23,7 @@ return new class() extends Migration
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', Constants::getUserStatusOptions())->default(Constants::getUserStatusDefault());
             $table->rememberToken();
             $table->timestamps();
         });

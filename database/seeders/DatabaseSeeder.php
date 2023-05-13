@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
     {
         Storage::deleteDirectory('public/images');
         Storage::makeDirectory('public/images');
-        User::factory(22)->create();
+        User::factory(2)->create();
         //funcion de usuarios sin corrreo verificadp
         // \App\Models\User::factory(50)->unverified()->create();
         Category::factory(3)->create();
-        Product::factory(15)->create();
+        Product::factory(2)->create();
 
         // seeder de los roles
         $this->call(RoleSeeder::class);

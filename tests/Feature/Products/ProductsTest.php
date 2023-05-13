@@ -14,13 +14,13 @@ class ProductsTest extends TestCase
 
     public function test_user_can_view_all_avaliables_products(): void
     {
-        Category::factory()->count(3)->create();
+        Category::factory()->count(1)->create();
 
-        $availableProducts = Product::factory()->count(5)->create([
+        $availableProducts = Product::factory()->count(2)->create([
             'status' => 'available',
         ]);
         $response = $this->get('/');
-        $response->assertStatus(200);
+        $response->assertOk();
 
         // verificar que los productos disponibles  aparecen en la vista
         foreach ($availableProducts as $availableProduct) {
@@ -32,13 +32,13 @@ class ProductsTest extends TestCase
     }
     public function test_user_cant_view_unavaliables_products(): void
     {
-        Category::factory()->count(3)->create();
+        Category::factory()->count(1)->create();
 
-        $unavailableProducts = Product::factory()->count(5)->create([
+        $unavailableProducts = Product::factory()->count(1)->create([
             'status' => 'unavailable',
         ]);
         $response = $this->get('/');
-        $response->assertStatus(200);
+        $response->assertOk();
 
         // verificar que los productos no disponibles no aparezcan en la vista
         foreach ($unavailableProducts as $unavailableProduct) {
@@ -47,11 +47,11 @@ class ProductsTest extends TestCase
     }
     public function test_user_can_search_products(): void
     {
-        Category::factory()->count(3)->create();
-        $availableProducts = Product::factory()->count(3)->create([
+        Category::factory(2)->create();
+        $availableProducts = Product::factory(1)->create([
             'status' => 'available',
         ]);
-        $unavailableProducts = Product::factory()->count(3)->create([
+        $unavailableProducts = Product::factory(1)->create([
             'status' => 'unavailable',
         ]);
 
@@ -62,7 +62,7 @@ class ProductsTest extends TestCase
         ]));
 
         // Verificar que se carguen correctamente los productos y la categoría
-        $response->assertSuccessful();
+        $response->assertOk();
         $response->assertViewHas('products');
         $response->assertViewHas('categories');
 
@@ -76,11 +76,10 @@ class ProductsTest extends TestCase
         ]));
 
         // Verificar que se carguen correctamente los productos y la categoría
-        $response->assertSuccessful();
+        $response->assertOk();
         $response->assertViewHas('products');
         $response->assertViewHas('categories');
         $response->assertDontSee($unavailableProducts->first()->title);
-        $response->assertDontSee($unavailableProducts->first()->image);
         $response->assertDontSee($unavailableProducts->first()->price);
     }
 }

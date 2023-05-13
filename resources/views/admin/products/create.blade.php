@@ -34,37 +34,57 @@
                         <label class="form-label" for="multicol-language">Status</label>
                         <select id="select2Basic" name="status" class="select2 form-select form-select-lg"
                             data-allow-clear="true">
-                            @if ($statuses->count())
+                            @empty($statuses)
+
+                                <option value="">No hay estados disponibles</option>
+                            @else
                                 @foreach ($statuses as $status)
                                     <option value="{{ $status }}" {{ old('status') == $status ? 'selected' : '' }}>
                                         {{ $status }}</option>
                                 @endforeach
-                            @else
-                                <option value="">No hay estados disponibles</option>
-                            @endif
 
-                        </select>
-                    </div>
+                                @endif
 
-                    <div class="col-md-6 select2-primary ">
-                        <label for="select2Basic" class="form-label">Category</label>
-                        <select id="select2Basic" name="category_id" class="select2 form-select form-select-lg"
-                            data-allow-clear="true">
-                            @if ($categories->count())
-                                @foreach ($categories as $category)
-                                    <option value={{ $category->id }}
-                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}</option>
-                                @endforeach
-                            @else
-                                <option value="">No hay categorias disponibles</option>
-                            @endif
+                            </select>
+                        </div>
 
-                        </select>
+
+                        @if ($categories->count())
+
+                            <div class="col-md-6 select2-primary ">
+                                <label for="select2Basic" class="form-label">Category</label>
+                                <select id="select2Basic" name="category_id" class="select2 form-select form-select-lg"
+                                    data-allow-clear="true">
+
+                                    @foreach ($categories as $category)
+                                        <option value={{ $category->id }}
+                                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        @else
+                            <div class="col-md-6 select2-primary ">
+                                <label for="select2Basic" class="form-label">Category</label>
+
+
+                                <div class="card-body shadow-none p-3 mb-5 bg-light rounded">No hay categorias
+
+
+                                    <a href="{{ route('admin.home') }}" class="btn btn-primary btn-sm">Crea una categoria</a>
+                                </div>
+
+
+                            </div>
+                        @endif
+
+
                     </div>
                     <div class="col-md-6">
                         <label class="form-label" for="multicol-username">IMG</label>
-                        <input type="file" name="image" accept="image/png, image/jpeg" class="form-control">
+                        <input type="file" value="{{ old('image') }}" name="image" accept="image/png, image/jpeg"
+                            class="form-control">
                     </div>
 
                     <div class="col-12">
@@ -76,8 +96,8 @@
                         </button>
 
                     </div>
-                </div>
+            </div>
             </form>
         </div>
-    </div>
-@endsection
+        </div>
+    @endsection

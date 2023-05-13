@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Constants;
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,7 @@ class AdminProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $statuses = Product::query()->distinct()->pluck('status');
+        $statuses = Constants::getProductStatusOptions();
         // dd($status);
         return view('admin.products.create', compact('categories', 'statuses'));
         //
@@ -40,7 +41,7 @@ class AdminProductController extends Controller
     public function store(AdminProductStore $request)
     {
         $path = $request['image']->store('public/images');
-        $newpath = str_replace("public/images", "", $path);
+        $newpath = str_replace("public", "storage", $path);
         $product = new Product([
             'title' => $request['title'],
             'image' => $newpath,
@@ -57,21 +58,17 @@ class AdminProductController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $id)
+
+    public function show(Product $product)
     {
+        return view('admin.products.show', compact('product'));
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
         $categories = Category::all();
-        $statuses = Product::query()->distinct()->pluck('status');
+        $statuses = Constants::getProductStatusOptions();
 
         return view('admin.products.edit', compact('product', 'categories', 'statuses'));
         //
@@ -86,7 +83,7 @@ class AdminProductController extends Controller
             // dd($product->image);
             Storage::delete('public/images' . $product->image);
             $path = $request['image']->store('public/images');
-            $newpath = str_replace("public/images", "", $path);
+            $newpath = str_replace("public", "storage", $path);
             $product->update([
                 'image' => $newpath,
                 'title' => $request['title'],
@@ -111,6 +108,12 @@ class AdminProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $filePath = public_path($product->image);
+        // Verificar si el archivo existe y eliminarlo si es así
+        if (file_exists($filePath)) {
+            Storage::delete('public/images/' . $product->image);
+            unlink($filePath);
+        }
         $product->delete();
 
         return redirect()->back()->withSuccess('Product deleted');

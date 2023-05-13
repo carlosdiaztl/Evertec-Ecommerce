@@ -19,13 +19,19 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = \Faker\Factory::create();
+        $faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($faker));
+        $imagePath = $faker->image(storage_path('app/public/images'), 400, 300, $category = "products", false, true, false);
+        $filename = basename($imagePath);
+        $path = 'storage/images/' . $filename;
+
         return [
             'title' => fake()->name('products'),
             'description' => fake()->paragraph(3),
             'price' => fake()->numberBetween(10000, 50000),
             'stock' => fake()->numberBetween(1, 100),
             'status' => fake()->randomElement(['available', 'unavailable',]),
-            'image' => fake()->image(storage_path('app/public/images'), 250, 300, 'products', null),
+            'image' => $path,
             'category_id' => function () {
                 return Category::inRandomOrder()->first()->id;
             },

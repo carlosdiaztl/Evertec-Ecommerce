@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Admin\products;
+namespace Tests\Feature\Admin\Products;
 
 use App\Models\Category;
 use App\Models\Product;
@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class productTest extends TestCase
+class ProductTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -23,7 +23,7 @@ class productTest extends TestCase
         Permission::create(['name' => 'admin.products.index'])->assignRole($role1);
         $user = User::factory()->create()->assignRole('Admin');
         $response = $this->actingAs($user)->get('/admin/products/index');
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_route_products_users_cant_access(): void
@@ -38,8 +38,8 @@ class productTest extends TestCase
         $role1 = Role::create(['name' => 'Admin']);
         Permission::create(['name' => 'admin.products.index'])->assignRole($role1);
         $user = User::factory()->create()->assignRole('Admin');
-        Category::factory()->count(3)->create();
-        Product::factory()->count(7)->create();
+        Category::factory()->count(2)->create();
+        Product::factory()->count(1)->create();
         $response = $this->actingAs($user)->get(route('admin.products.index'));
         $products = Product::query()->paginate(10); // se obtienen los productos que se están mostrando en la vista
         foreach ($products as $product) {

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Requests\UpdateUser;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Middleware\CheckUserAccess;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -40,8 +41,12 @@ class UserController extends Controller
         if ($request->has('image')) {
             // fasat storage storage para buscar el patch de la imagen actual y borrarla
 
-
-
+            $filePath = public_path($user->image);
+            // Verificar si el archivo existe y eliminarlo si es así
+            if (file_exists($filePath)) {
+                Storage::delete('public/images/' . $user->image);
+                unlink($filePath);
+            }
             $path = $request['image']->store('public/images');
             $newpath = str_replace("public", "storage", $path);
             $user->update(

@@ -132,7 +132,7 @@
                                 <div class="card w-100 h-100">
                                     <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                                         data-mdb-ripple-color="light">
-                                        <img class="w-100" src={{ asset('storage/images/' . $product->image) }} />
+                                        <img class="w-100" src={{ asset($product->image) }} />
                                         <a href="{{ route('product.show', $product) }}">
                                             <div class="mask">
                                                 <div class="d-flex justify-content-start align-items-end h-100">

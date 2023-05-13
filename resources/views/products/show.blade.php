@@ -93,7 +93,7 @@
         <div class="row">
             <!--Grid column-->
             <div class="col-md-6 mb-4">
-                <img src={{ asset('storage/images/' . $product->image) }} class="img-fluid" alt="" />
+                <img src={{ asset($product->image) }} class="img-fluid" alt="" />
             </div>
             <!--Grid column-->
 
@@ -163,7 +163,7 @@
             @if ($firstThreeProducts->count())
                 @foreach ($firstThreeProducts as $productx)
                     <div class="col-lg-4 col-md-12 mb-4">
-                        <img src={{ asset('storage/images/' . $productx->image) }} class="img-fluid" alt="" />
+                        <img src={{ asset($productx->image) }} class="img-fluid" alt="" />
                     </div>
                 @endforeach
 

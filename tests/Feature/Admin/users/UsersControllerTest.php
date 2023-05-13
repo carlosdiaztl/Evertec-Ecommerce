@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Admin\users;
+namespace Tests\Feature\Admin\Users;
 
 use Tests\TestCase;
 use App\Models\User;
@@ -42,10 +42,10 @@ class UsersControllerTest extends TestCase
         $user = User::factory()->create()->assignRole('Admin');
         $user2 = User::factory()->create();
         $response = $this->actingAs($user)->get(route('admin.users.edit', $user));
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee('users');
         $response = $this->actingAs($user)->get(route('admin.users.edit', $user2));
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertViewIs('admin.users.edit');
     }
 }
