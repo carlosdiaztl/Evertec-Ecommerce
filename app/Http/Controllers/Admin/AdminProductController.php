@@ -53,7 +53,7 @@ class AdminProductController extends Controller
         ]);
         $product->save();
 
-        return redirect()->back()->withSuccess('Producto creado ');
+        return redirect()->back()->with(['success' => 'Producto creado']);
 
         //
     }
@@ -79,8 +79,8 @@ class AdminProductController extends Controller
      */
     public function update(AdminProductUpdate $request, Product $product)
     {
-        if ($request->hasFile('image') && ($request['image'] != $product->image)) {
-            // dd($product->image);
+        if ($request->hasFile('image')) {
+
             Storage::delete('public/images' . $product->image);
             $path = $request['image']->store('public/images');
             $newpath = str_replace("public", "storage", $path);
@@ -94,11 +94,11 @@ class AdminProductController extends Controller
                 'price' => $request['price'],
             ]);
 
-            return redirect()->route('admin.products.index')->withSuccess('Producto actualizado. ');
+            return redirect()->route('admin.products.index')->with(['success' => 'Producto actualizado.']);
         }
         $product->update($request->validated());
 
-        return redirect()->route('admin.products.index')->withSuccess('Producto actualizado ');
+        return redirect()->route('admin.products.index')->with(['success' => 'Producto actualizado.']);
         // dd($request);
         //
     }
@@ -116,7 +116,7 @@ class AdminProductController extends Controller
         }
         $product->delete();
 
-        return redirect()->back()->withSuccess('Product deleted');
+        return redirect()->back()->with(['success' => 'Producto eliminado']);
         //
     }
 }

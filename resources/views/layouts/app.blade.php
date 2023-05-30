@@ -23,6 +23,7 @@
     <!--Main Navigation-->
     <header>
         <!-- Sidebar -->
+
         <nav id="sidebarMenu"
             class="{{ auth() && auth()->user() ? 'collapse d-lg-block sidebar collapse bg-white' : 'd-none' }}">
 
@@ -215,6 +216,7 @@
     <main class="{{ auth() && auth()->user() ? 'mt-5 pt-3 sidebarauth' : 'mt-5 pt-3' }}">
 
         @yield('content')
+
         @if (isset($errors) && $errors->any())
             <div class="container text-center">
 
