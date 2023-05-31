@@ -122,13 +122,15 @@
 
 
         <!-- Products -->
+
+        <!-- Products -->
         <section>
             <div id="app">
                 {{-- <product-component products="{{ json_encode($products) }}"></product-component> --}}
-        <products-component></products-component>
+        <product-example  authenticated="{{ auth()->user() && auth()->user()->id ? auth()->user()->id :null}}" ></product-example>
                 
             </div>
-            
+           
         </section>
 
 

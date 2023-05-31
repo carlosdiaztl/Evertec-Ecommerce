@@ -1,99 +1,52 @@
 <template>
-    <div class="text-center">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 mb-4" v-for="item in items" :key="item.id">
+    <div>
+        product components
 
-                <div class="card w-100 h-100">
-                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                        data-mdb-ripple-color="light">
-                        <img class="w-100" :src="getImage(item.image)" />
-                        <a href="{{ route('product.show', $product) }}">
-                            <div class="mask">
-                                <div class="d-flex justify-content-start align-items-end h-100">
-                                    <h5><span class="badge bg-dark ms-2">NEW</span></h5>
-                                </div>
-                            </div>
-                            <div class="hover-overlay">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
-                                </div>
-                            </div>
-                            {{ item.title }}
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <span class="text-reset">
-                            <h5 class="card-title mb-2">{{ item.title }} </h5>
-                        </span>
-                       
-
-
-                    </div>
-                    <div class="card-footer p-0 bg-white border-0  ">
-                        <h6 class="mb-3 price">{{ item.price }}$</h6>
-
-                    </div>
-                </div>
-
-
-            </div>
+        <!-- Accessing the data attribute of each product -->
+        <div v-for="product in parsedProducts" :key="product.id">
+            <p>Id: {{ product.id }}</p>
+            <p>Title: {{ product.title }}</p>
+            <p>Description: {{ product.description }}</p>
+            <p>Stock: {{ product.stock }}</p>
+            <p>Stock: {{ product.image }}</p>
+            <img :src="getImageUrl(product.image)" alt="" />
         </div>
-       
-     <nav class="d-flex justify-items-center justify-content-center">
-
-         <ul class="pagination center">
-            <li class="page-item">
-                <span class="page-link" :class="hasPrevPage ? 'active' : ''" @click="hasPrevPage?fetchPage(prevPageUrl):null">Anterior</span>
-              </li>
-              <li class="page-item active" >
-
-                  <span class="page-link">{{currentPage  }} </span>
-              </li>
-           <li class="page-item">
-   <span class="page-link" :class="hasNextPage?'active':''"  @click="hasNextPage ? fetchPage(nextPageUrl) : null">Siguiente</span>
-               
-           </li>
-         </ul>
-     </nav>
+        <ul>
+            <li v-for="link in paginationLinks" :key="link.url">
+                <a :href="link.url">{{ link.label }}</a>
+            </li>
+        </ul>
     </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
+</template>
+
+<script>
+export default {
+    props: {
+        products: {
+            type: Array,
+            required: true,
+        },
+        paginationLinks: {
+            type: Array,
+            required: true,
+        },
+    },
     data() {
-      return {
-        items: [],
-        currentPage: 1,
-        prevPageUrl: '',
-        nextPageUrl: '',
-        hasPrevPage: false,
-        hasNextPage: false
-      };
+        return {
+            parsedProducts: [],
+            // Initialize an empty array for parsed products
+        };
     },
     mounted() {
-      this.fetchPage(window.location.href.substring(0, window.location.href.indexOf('public/') + 7)+'api/products');
+
+
+        this.parsedProducts = JSON.parse(this.products).data;
+        console.log(this.parsedProducts);
     },
     methods: {
-      fetchPage(url) {
-        axios.get(url)
-          .then(response => {
-            this.items = response.data.data;
-            this.currentPage = response.data.current_page;
-            this.prevPageUrl = response.data.prev_page_url;
-            this.nextPageUrl = response.data.next_page_url;
-            this.hasPrevPage = !!response.data.prev_page_url;
-            this.hasNextPage = !!response.data.next_page_url;
-            console.log(response.data);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      },
-      getImage(rutaProducto) {
-    const baseUrl = window.location.href.substring(0, window.location.href.indexOf('public/') + 7);
-    return baseUrl + rutaProducto;
-  }
-    }
-  };
-  </script>
+        getImageUrl(image) {
+            return "http://localhost/Evertec-Ecommerce/public/" + image; // Concatenate the image URL with additional text
+        },
+    },
+};
+</script>

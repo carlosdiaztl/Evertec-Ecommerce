@@ -120,13 +120,13 @@
     </nav>
     <!-- Navbar -->
     <div class="container">
-
+        {{auth()->user}}
 
         <!-- Products -->
         <section>
             <div id="app">
                 {{-- <product-component products="{{ json_encode($products) }}"></product-component> --}}
-        <product-example></product-example>
+        <product-example ></product-example>
                 
             </div>
            

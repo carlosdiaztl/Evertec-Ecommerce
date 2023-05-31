@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         //funcion de usuarios sin corrreo verificadp
         // \App\Models\User::factory(50)->unverified()->create();
         Category::factory(3)->create();
-        Product::factory(20)->create();
+        Product::factory(50)->create();
 
         // seeder de los roles
         $this->call(RoleSeeder::class);
