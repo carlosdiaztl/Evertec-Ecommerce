@@ -33,7 +33,7 @@
             <h6 class="price">{{ item.price }}$</h6>
           </div>
           <div class="card-footer bg-white border-0 text-150">
-            <button v-if="authenticated"  @click="addCart(item)" class="btn btn-success btn-sm mb-3">
+            <button v-if="authenticated" @click="addCart(item)" class="btn btn-success btn-sm mb-3">
               Agregar<i class="fas fa-cart-plus"></i>
             </button>
           </div>
@@ -58,8 +58,8 @@
     </nav>
     <div class="col-12">
 
-      <button type="button" class="btn btn-success sticky-bottom mb-5 w-50"   data-bs-toggle="modal" data-bs-target="#onboardImageModal"
-        v-if="tieneElementos && authenticated"  >
+      <button type="button" class="btn btn-success sticky-bottom mb-5 w-50" data-bs-toggle="modal"
+        data-bs-target="#onboardImageModal" v-if="tieneElementos && authenticated">
         <i class="fas fa-shopping-cart "></i>
       </button>
     </div>
@@ -83,7 +83,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <ul class="p-0 m-0" v-for="product in this.carrito" :key="product.id">
+                  <ul class="p-0 m-0" v-for="(product, index) in uniqueProducts" :key="index">
                     <li class="d-flex mb-4 pb-1">
                       <div class="me-3">
                         <img :src="getImage(product.image)
@@ -96,16 +96,19 @@
                           </h6>
                           <small class="text-muted d-block">Item: #FXZ-4567</small>
                         </div>
-                        <div class="user-progress d-flex align-items-center gap-1 ">
-                          <p class="mb-0 fw-semibold">
+                        <div class="d-flex ">
+                          <p class="fw-semibold">
                             ${{ product.price }}
                           </p>
-                          <button @click="eliminarElementoCarrito(product.id)" class="btn btn-danger mx-2" ><i class="far fa-trash-alt"></i> </button>
+                          <h class="fw-semibold mx-2 ">Cantidad: {{ product.cantidad }} </h>
+                          <button @click="eliminarElementoCarrito(product.id)" class="btn btn-danger ">-1 <i
+                              class="far fa-trash-alt"></i> </button>
                         </div>
                       </div>
                     </li>
                   </ul>
                 </div>
+
               </div>
             </div>
           </div>
@@ -113,8 +116,8 @@
             <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn btn-primary">
-              Submit
+            <button type="button" @click="createCart" class="btn btn-success">
+              Confirmar orden
             </button>
           </div>
         </div>
@@ -136,15 +139,16 @@ export default {
       hasPrevPage: false,
       hasNextPage: false,
       carrito: [],
+      carritoReduced: [],
     };
   },
   props: {
     authenticated: {
-            type:Number,
-            required: true,
-        },
-        
+      type: Number,
+      required: true,
     },
+
+  },
   mounted() {
     this.fetchPage(
       window.location.href.substring(
@@ -205,6 +209,44 @@ export default {
     tieneElementos() {
       return this.carrito && this.carrito.length > 0;
     },
+    uniqueProducts() {
+      this.carritoReduced = Object.values(this.carrito.reduce((groups, product) => {
+        const productId = product.id;
+        const existingProduct = groups.find(item => item.id === productId);
+        if (!existingProduct) {
+          groups.push({
+            ...product,
+            cantidad: 1, // Agregar campo cantidad
+          });
+        } else {
+          existingProduct.cantidad++; // Incrementar cantidad
+        }
+        return groups;
+      }, []));
+
+      return this.carritoReduced;
+    },
+    createCart() {
+      const total = this.carritoReduced.reduce((sum, product) => sum + (product.price * product.cantidad), 0);
+      const order = {
+        ...this.carritoReduced,
+        total: total, // Agregar la suma total
+        user_id: this.authenticated, // Agregar el ID del cliente
+        status:'unconfirmed'
+      };
+      console.log(this.carritoReduced);
+      console.log(order);
+      axios.post(window.location.href.substring(0,window.location.href.indexOf("public/") + 7) + "api/orders",order)
+      .then(response => {
+      // Lógica adicional cuando la petición es exitosa
+      console.log(response.data);
+    })
+    .catch(error => {
+      // Manejo de errores cuando la petición falla
+      console.error(error);
+    });
+      // Aquí puedes realizar la lógica adicional para crear la orden con el objeto `order`
+    }
   },
 };
 </script>

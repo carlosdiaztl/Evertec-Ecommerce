@@ -29,4 +29,16 @@ class Constants
     {
         return 'available';
     }
+    public static function getOrderStatusOptions()
+    {
+        return [
+            'confirmed',
+            'unconfirmed',
+            'pending',
+        ];
+    }
+    public static function getOrderStatusDefault()
+    {
+        return 'unconfirmed';
+    }
 }
