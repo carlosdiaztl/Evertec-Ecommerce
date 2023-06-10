@@ -13,17 +13,6 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 
 Route::get('/', [MainController::class, 'index'])->name('welcome');
 Route::get('/product/{product}', [MainController::class, 'show'])->name('product.show');
@@ -40,7 +29,6 @@ Route::get('/cache', function () {
 // verificcion en rutas auth
 Auth::routes(['verify' => true]);
 
-
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('verified',)->group(function () {
         Route::resource('users', AdminUserController::class)->names('users')->except('store')->middleware(['can:admin.users.index', 'can:admin.users.edit']);
@@ -50,9 +38,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('users-pdf-export', [AdminUserController::class, 'exportPDF'])->name('users-pdf-export');
         Route::get('users-excel-export', [AdminUserController::class, 'exportExcel'])->name('users-excel-export');
 
-        // ruta admin products
-
-        // Route::resource('product', ProductController::class)->names('products')->middleware(['admin.products.index']);
+    
     });
 });
 

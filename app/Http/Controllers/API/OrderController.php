@@ -21,8 +21,6 @@ class OrderController extends Controller
         $order->status = $data['status'];
         $order->save();
 
-
-        
         $total = 0;
 
         foreach ($data as $key => $value) {

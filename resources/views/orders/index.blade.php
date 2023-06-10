@@ -1,16 +1,12 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="container">
         <div class="card border-0">
-
             <div class="card-header border-0">
                 <h3>
-                    
                     Tus ordenes
                 </h3>
             </div>
-            
         </div>
         <div class="row justify-content-center mt-2">
             @if (count($user->orders))
@@ -32,10 +28,14 @@
                         </div>
                         @if ($order->status === 'unconfirmed')
                             <div class="card-footer border-0 bg-white text-center">
-
                                 <button class="btn btn-primary" type="submit">Pagar</button>
                             </div>
                         @endif
+                        @if ($order->status === 'pending')
+                        <div class="card-footer border-0 bg-white text-center">
+                            <button class="btn btn-primary" type="submit">Re intentar pago</button>
+                        </div>
+                    @endif
                     </form>
                 @endforeach
             @endif

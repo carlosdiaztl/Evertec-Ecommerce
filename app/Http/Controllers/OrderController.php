@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use App\Models\User;
-use Illuminate\Http\Request;
-
-use function GuzzleHttp\Promise\all;
+use App\Services\PaymentService;
 
 class OrderController extends Controller
-{
-    public function index(User $user){
-        return view('orders.index',compact('user'));
+{ 
+    private $paymentService;
+
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
+    public function index(User $user){   
+    $orders = $user->orders()->whereIn('status', ['unconfirmed', 'pending'])->get();
+    if(count($orders)){
+        foreach ($orders as $order) {
+            $order->order_id?$this->paymentService->getRequestInformation($order):null;
+        };
+    }
+        return view('orders.index', compact('user'));
     }
     //
 }

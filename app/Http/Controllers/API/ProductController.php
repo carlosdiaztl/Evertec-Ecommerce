@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index(){
 
-        $products = Product::query()->available()->paginate(8);
+        $products = Product::query()->available()->with('category')->paginate(8);
         return response()->json($products);
 
     }
