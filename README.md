@@ -1,7 +1,7 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <h1> e-commerce bootcamp EVERTEC </h1>
-
+PARA DESCARGAR EL PROYECTO ACTUAL VE A LA RAMA DEVELOP 
 
 <h4>Pasos de instalación</h4>
 
