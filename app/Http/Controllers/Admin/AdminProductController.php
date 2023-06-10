@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Constants;
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,7 @@ class AdminProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $statuses = Product::query()->distinct()->pluck('status');
+        $statuses = Constants::getProductStatusOptions();
         // dd($status);
         return view('admin.products.create', compact('categories', 'statuses'));
         //
@@ -40,7 +41,7 @@ class AdminProductController extends Controller
     public function store(AdminProductStore $request)
     {
         $path = $request['image']->store('public/images');
-        $newpath = str_replace("public/images", "", $path);
+        $newpath = str_replace("public", "storage", $path);
         $product = new Product([
             'title' => $request['title'],
             'image' => $newpath,
@@ -52,26 +53,22 @@ class AdminProductController extends Controller
         ]);
         $product->save();
 
-        return redirect()->back()->withSuccess('Producto creado ');
+        return redirect()->back()->with(['success' => 'Producto creado']);
 
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $id)
+
+    public function show(Product $product)
     {
+        return view('admin.products.show', compact('product'));
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Product $product)
     {
         $categories = Category::all();
-        $statuses = Product::query()->distinct()->pluck('status');
+        $statuses = Constants::getProductStatusOptions();
 
         return view('admin.products.edit', compact('product', 'categories', 'statuses'));
         //
@@ -82,11 +79,11 @@ class AdminProductController extends Controller
      */
     public function update(AdminProductUpdate $request, Product $product)
     {
-        if ($request->hasFile('image') && ($request['image'] != $product->image)) {
-            // dd($product->image);
+        if ($request->hasFile('image')) {
+
             Storage::delete('public/images' . $product->image);
             $path = $request['image']->store('public/images');
-            $newpath = str_replace("public/images", "", $path);
+            $newpath = str_replace("public", "storage", $path);
             $product->update([
                 'image' => $newpath,
                 'title' => $request['title'],
@@ -97,11 +94,11 @@ class AdminProductController extends Controller
                 'price' => $request['price'],
             ]);
 
-            return redirect()->route('admin.products.index')->withSuccess('Producto actualizado. ');
+            return redirect()->route('admin.products.index')->with(['success' => 'Producto actualizado.']);
         }
         $product->update($request->validated());
 
-        return redirect()->route('admin.products.index')->withSuccess('Producto actualizado ');
+        return redirect()->route('admin.products.index')->with(['success' => 'Producto actualizado.']);
         // dd($request);
         //
     }
@@ -111,9 +108,15 @@ class AdminProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $filePath = public_path($product->image);
+        // Verificar si el archivo existe y eliminarlo si es así
+        if (file_exists($filePath)) {
+            Storage::delete('public/images/' . $product->image);
+            unlink($filePath);
+        }
         $product->delete();
 
-        return redirect()->back()->withSuccess('Product deleted');
+        return redirect()->back()->with(['success' => 'Producto eliminado']);
         //
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Product;
 
+use App\Constants;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminProductUpdate extends FormRequest
@@ -26,14 +27,12 @@ class AdminProductUpdate extends FormRequest
         return [
             'title' => ['required', 'string', 'max:200'],
             'description' => ['required', 'string', 'max:250'],
-            'status' => ['required', 'in:available,unavailable'],
+            'status' => ['required', 'in:' . implode(',', Constants::getProductStatusOptions())],
             'category_id' => ['required', 'exists:categories,id'],
-            'stock' => ['required', 'int', 'max:999999999'],
-            'price' => ['required', 'int', 'max:999999999'],
+            'stock' => ['required', 'int', 'min:1', 'max:9999'],
+            'price' => ['required', 'int', 'min:1000', 'max:1000000'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2000'],
         ];
-        if ($this->hasFile('image')) {
-            $rules['image'] = ['required', 'image', 'mimes:jpeg,png', 'max:2000'];
-        }
     }
 
     public function withValidator($validator)

@@ -23,6 +23,7 @@
     <!--Main Navigation-->
     <header>
         <!-- Sidebar -->
+
         <nav id="sidebarMenu"
             class="{{ auth() && auth()->user() ? 'collapse d-lg-block sidebar collapse bg-white' : 'd-none' }}">
 
@@ -55,6 +56,13 @@
                         <a href="{{ route('user.edit', auth()->user()->id) }}"
                             class="list-group-item list-group-item-action py-2 ripple "><i
                                 class="fas fa-user fa-fw me-3"></i><span>Profile</span></a>
+                    @endif
+                    @if (auth() && auth()->user())
+                    @if (count(auth()->user()->orders) )
+                    <a href="{{ route('orders.index', auth()->user()->id) }}"
+                        class="list-group-item list-group-item-action py-2 ripple "><i
+                            class="fas fa-shopping-bag fa-fw me-3"></i><span>Orders</span></a>
+                    @endif
                     @endif
 
                     {{-- <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
@@ -215,6 +223,7 @@
     <main class="{{ auth() && auth()->user() ? 'mt-5 pt-3 sidebarauth' : 'mt-5 pt-3' }}">
 
         @yield('content')
+
         @if (isset($errors) && $errors->any())
             <div class="container text-center">
 

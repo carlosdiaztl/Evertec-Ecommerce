@@ -36,47 +36,54 @@
                         <label class="form-label" for="multicol-language">Status</label>
                         <select id="select2Basic" name="status" class="select2 form-select form-select-lg">
 
-                            @foreach ($statuses as $status)
-                                <option value="{{ $status }}"
-                                    {{ old('status', $product->status) == $status ? 'selected' : '' }}>
+                            @empty($statuses)
 
-                                    {{ $status }}</option>
-                            @endforeach
+                                <option value="">No hay estados disponibles</option>
+                            @else
+                                @foreach ($statuses as $status)
+                                    <option value="{{ $status }}" {{ old('status') == $status ? 'selected' : '' }}>
+                                        {{ $status }}</option>
+                                @endforeach
 
-                        </select>
-                    </div>
+                                @endif
+                            </select>
+                        </div>
 
-                    <div class="col-md-6 select2-primary ">
-                        <label for="select2Basic" class="form-label">Category</label>
-                        <select id="select2Basic" name="category_id" class="select2 form-select form-select-lg"
-                            data-allow-clear="true">
-                            @foreach ($categories as $category)
-                                <option value={{ $category->id }}
-                                    {{ old('category_id', $category->id) == $category->id ? 'selected' : '' }}>
+                        <div class="col-md-6 select2-primary ">
+                            <label for="select2Basic" class="form-label">Category</label>
+                            <select id="select2Basic" name="category_id" class="select2 form-select form-select-lg"
+                                data-allow-clear="true">
+                                @empty($categories)
+                                    <option value="">No hay categorias disponibles crea una primero</option>
+                                @else
+                                    @foreach ($categories as $category)
+                                        <option value={{ $category->id }}
+                                            {{ old('category_id', $category->id) == $category->id ? 'selected' : '' }}>
 
-                                    {{ $category->name }}</option>
-                            @endforeach
+                                            {{ $category->name }}</option>
+                                    @endforeach
+                                    @endif
 
 
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="multicol-username">IMG</label>
-                        <input type="file" value={{ $product->image }} name="image" accept="image/png, image/jpeg"
-                            class="form-control">
-                    </div>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="multicol-username">IMG</label>
+                                <input type="file" value={{ $product->image }} name="image" accept="image/png, image/jpeg"
+                                    class="form-control">
+                            </div>
 
-                    <div class="col-12">
-                        <button type="reset" class="btn btn-secondary">
-                            Reset
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            Edit
-                        </button>
+                            <div class="col-12">
+                                <button type="reset" class="btn btn-secondary">
+                                    Reset
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Edit
+                                </button>
 
-                    </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
-@endsection
+            </div>
+        @endsection

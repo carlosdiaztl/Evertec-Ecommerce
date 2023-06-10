@@ -2,6 +2,7 @@
 @section('content')
     <div class="container">
         <a class="btn btn-primary mb-2" href="{{ route('admin.products.create') }}">Create new product</a>
+        <a class="btn btn-primary mb-2" href="{{ route('admin.categories.index') }}">View categories</a>
         @if ($products->count())
             <div class="card">
                 <h5 class="card-header">Products</h5>
@@ -44,8 +45,8 @@
                                     <td>
 
 
-                                        <img src="{{ asset('storage/images/' . $product->image) }}" alt="Avatar"
-                                            class="rounded-circle" height="70px" width="70px" />
+                                        <img src="{{ asset($product->image) }}" alt="Avatar" class="rounded-circle"
+                                            height="70px" width="70px" />
 
 
                                     </td>

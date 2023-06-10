@@ -15,7 +15,7 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create();
         $user2 = User::factory()->create();
         $response = $this->actingAs($user)->get(route('user.edit', $user));
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_user_cant_access_otherProfile(): void
