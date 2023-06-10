@@ -14,8 +14,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-          
-            $table->unsignedBigInteger('total'); // Valor predeterminado de 0
+            $table->string('order_id')->nullable();
+            $table->string('url')->nullable();
+            $table->unsignedBigInteger('total');
             $table->unsignedBigInteger('user_id');
             $table->enum('status', Constants::getOrderStatusOptions())->default(Constants::getOrderStatusDefault());
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

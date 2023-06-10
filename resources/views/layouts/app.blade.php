@@ -57,6 +57,13 @@
                             class="list-group-item list-group-item-action py-2 ripple "><i
                                 class="fas fa-user fa-fw me-3"></i><span>Profile</span></a>
                     @endif
+                    @if (auth() && auth()->user())
+                    @if (count(auth()->user()->orders) )
+                    <a href="{{ route('orders.index', auth()->user()->id) }}"
+                        class="list-group-item list-group-item-action py-2 ripple "><i
+                            class="fas fa-shopping-bag fa-fw me-3"></i><span>Orders</span></a>
+                    @endif
+                    @endif
 
                     {{-- <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
                             class="fas fa-lock fa-fw me-3"></i><span>Password</span></a>

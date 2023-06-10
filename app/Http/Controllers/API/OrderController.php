@@ -14,12 +14,14 @@ class OrderController extends Controller
 
         $data = json_decode($request->getContent(), true);
 
-    // Crear la orden
+        // Crear la orden
         $order = new Order();
         $order->user_id = $data['user_id'];
         $order->total = $data['total'];
         $order->status = $data['status'];
         $order->save();
+
+
         
         $total = 0;
 
@@ -30,7 +32,6 @@ class OrderController extends Controller
                 $productOrder->product_id = $value['id'];
                 $productOrder->quantity = $value['cantidad'];
                 $productOrder->save();
-        
             }
         }
         return response()->json(['message' => 'Orden almacenada exitosamente'], 201);

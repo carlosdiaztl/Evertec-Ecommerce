@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +60,8 @@ Route::middleware('verified')->group(function () {
     Route::get('/home', [MainController::class, 'index'])->name('home');
     Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('user/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::get('orders/{user}', [OrderController::class,'index'])->name('orders.index');
+    Route::post('payment/{order}', [PaymentController::class,'pay'])->name('payment.placetopay');
 
     // Route::resource('users', App\Http\Controllers\UserController::class)->names('admin.users')->except('store');
 });

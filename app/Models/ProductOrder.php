@@ -14,4 +14,5 @@ class ProductOrder extends Model
         'quantity'
        
     ];
+    
 }

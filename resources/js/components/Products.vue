@@ -3,7 +3,10 @@
     <div class="row">
       <div class="col-lg-3 col-md-6 mb-4" v-for="item in items" :key="item.id">
         <div class="card w-100 h-100">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
+          <div
+            class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+            data-mdb-ripple-color="light"
+          >
             <img class="w-100" :src="getImage(item.image)" />
             <span>
               <div class="mask">
@@ -14,14 +17,17 @@
                 </div>
               </div>
               <div class="hover-overlay">
-                <div class="mask" style="
+                <div
+                  class="mask"
+                  style="
                                         background-color: rgba(
                                             251,
                                             251,
                                             251,
                                             0.15
                                         );
-                                    "></div>
+                                    "
+                ></div>
               </div>
               {{ item.title }}
             </span>
@@ -34,7 +40,8 @@
           </div>
           <div class="card-footer bg-white border-0 text-150">
             <button v-if="authenticated" @click="addCart(item)" class="btn btn-success btn-sm mb-3">
-              Agregar<i class="fas fa-cart-plus"></i>
+              Agregar
+              <i class="fas fa-cart-plus"></i>
             </button>
           </div>
         </div>
@@ -44,26 +51,41 @@
     <nav class="d-flex justify-items-center justify-content-center">
       <ul class="pagination center">
         <li class="page-item">
-          <span class="page-link" :class="hasPrevPage ? 'active' : ''"
-            @click="hasPrevPage ? fetchPage(prevPageUrl) : null">Anterior</span>
+          <span
+            class="page-link"
+            :class="hasPrevPage ? 'active' : ''"
+            @click="hasPrevPage ? fetchPage(prevPageUrl) : null"
+          >Anterior</span>
         </li>
         <li class="page-item active">
-          <span class="page-link">{{ currentPage }} </span>
+          <span class="page-link">{{ currentPage }}</span>
         </li>
         <li class="page-item">
-          <span class="page-link" :class="hasNextPage ? 'active' : ''"
-            @click="hasNextPage ? fetchPage(nextPageUrl) : null">Siguiente</span>
+          <span
+            class="page-link"
+            :class="hasNextPage ? 'active' : ''"
+            @click="hasNextPage ? fetchPage(nextPageUrl) : null"
+          >Siguiente</span>
         </li>
       </ul>
     </nav>
     <div class="col-12">
-
-      <button type="button" class="btn btn-success sticky-bottom mb-5 w-50" data-bs-toggle="modal"
-        data-bs-target="#onboardImageModal" v-if="tieneElementos && authenticated">
-        <i class="fas fa-shopping-cart "></i>
+      <button
+        type="button"
+        class="btn btn-success sticky-bottom mb-5 w-50"
+        data-bs-toggle="modal"
+        data-bs-target="#onboardImageModal"
+        v-if="tieneElementos && authenticated"
+      >
+        <i class="fas fa-shopping-cart"></i>
       </button>
     </div>
-    <div class="modal-onboarding modal fade animate__animated" id="onboardImageModal" tabindex="-1" aria-hidden="true">
+    <div
+      class="modal-onboarding modal fade animate__animated"
+      id="onboardImageModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content text-center">
           <div class="modal-header border-0">
@@ -76,49 +98,64 @@
               <div class="card h-100">
                 <div class="card-header d-flex justify-content-between">
                   <div class="card-title m-0 me-2">
-                    <h5 class="m-0 me-2">
-                      Popular Products
-                    </h5>
+                    <h5 class="m-0 me-2">Popular Products</h5>
                     <small class="text-muted">Total 10.4k Visitors</small>
                   </div>
                 </div>
                 <div class="card-body">
-                  <ul class="p-0 m-0" v-for="(product, index) in uniqueProducts" :key="index">
+                  <ul
+                    class="p-0 m-0"
+                    v-for="(
+                                            product, index
+                                        ) in uniqueProducts"
+                    :key="index"
+                  >
                     <li class="d-flex mb-4 pb-1">
                       <div class="me-3">
-                        <img :src="getImage(product.image)
-                          " alt="User" class="rounded" width="46" />
+                        <img
+                          :src="
+                                                        getImage(product.image)
+                                                    "
+                          alt="User"
+                          class="rounded"
+                          width="46"
+                        />
                       </div>
-                      <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                      <div
+                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2"
+                      >
                         <div class="me-2">
-                          <h6 class="mb-0">
-                            {{ product.title }}
-                          </h6>
+                          <h6 class="mb-0">{{ product.title }}</h6>
                           <small class="text-muted d-block">Item: #FXZ-4567</small>
                         </div>
-                        <div class="d-flex ">
-                          <p class="fw-semibold">
-                            ${{ product.price }}
-                          </p>
-                          <h class="fw-semibold mx-2 ">Cantidad: {{ product.cantidad }} </h>
-                          <button @click="eliminarElementoCarrito(product.id)" class="btn btn-danger ">-1 <i
-                              class="far fa-trash-alt"></i> </button>
+                        <div class="d-flex">
+                          <p class="fw-semibold">${{ product.price }}</p>
+                          <h class="fw-semibold mx-2">
+                            Cantidad:
+                            {{ product.cantidad }}
+                          </h>
+                          <button
+                            @click="
+                                                            eliminarElementoCarrito(
+                                                                product.id
+                                                            )
+                                                        "
+                            class="btn btn-danger"
+                          >
+                            -1
+                            <i class="far fa-trash-alt"></i>
+                          </button>
                         </div>
                       </div>
                     </li>
                   </ul>
                 </div>
-
               </div>
             </div>
           </div>
           <div class="modal-footer border-0">
-            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-              Close
-            </button>
-            <button type="button" @click="createCart" class="btn btn-success">
-              Confirmar orden
-            </button>
+            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" @click="createCart" class="btn btn-success">Confirmar orden</button>
           </div>
         </div>
       </div>
@@ -128,6 +165,7 @@
 
 <script>
 import axios from "axios";
+import swal from "sweetalert2";
 
 export default {
   data() {
@@ -139,15 +177,14 @@ export default {
       hasPrevPage: false,
       hasNextPage: false,
       carrito: [],
-      carritoReduced: [],
+      carritoReduced: []
     };
   },
   props: {
     authenticated: {
       type: Number,
-      required: true,
-    },
-
+      required: true
+    }
   },
   mounted() {
     this.fetchPage(
@@ -162,8 +199,9 @@ export default {
   },
   methods: {
     fetchPage(url) {
-      axios.get(url)
-        .then((response) => {
+      axios
+        .get(url)
+        .then(response => {
           this.items = response.data.data;
           this.currentPage = response.data.current_page;
           this.prevPageUrl = response.data.prev_page_url;
@@ -172,7 +210,7 @@ export default {
           this.hasNextPage = !!response.data.next_page_url;
           console.log(response.data);
         })
-        .catch((error) => {
+        .catch(error => {
           console.error(error);
         });
     },
@@ -195,58 +233,70 @@ export default {
     },
     eliminarElementoCarrito(id) {
       // Busca el índice del elemento con el ID especificado en el carrito
-      const index = this.carrito.findIndex(
-        (producto) => producto.id === id
-      );
+      const index = this.carrito.findIndex(producto => producto.id === id);
 
       this.carrito.splice(index, 1); // Elimina el elemento del array en la posición index
 
       // Actualiza el localStorage con el carrito actualizado
       localStorage.setItem("carrito", JSON.stringify(this.carrito));
-    },
+    }
   },
   computed: {
     tieneElementos() {
       return this.carrito && this.carrito.length > 0;
     },
     uniqueProducts() {
-      this.carritoReduced = Object.values(this.carrito.reduce((groups, product) => {
-        const productId = product.id;
-        const existingProduct = groups.find(item => item.id === productId);
-        if (!existingProduct) {
-          groups.push({
-            ...product,
-            cantidad: 1, // Agregar campo cantidad
-          });
-        } else {
-          existingProduct.cantidad++; // Incrementar cantidad
-        }
-        return groups;
-      }, []));
+      this.carritoReduced = Object.values(
+        this.carrito.reduce((groups, product) => {
+          const productId = product.id;
+          const existingProduct = groups.find(item => item.id === productId);
+          if (!existingProduct) {
+            groups.push({
+              ...product,
+              cantidad: 1 // Agregar campo cantidad
+            });
+          } else {
+            existingProduct.cantidad++; // Incrementar cantidad
+          }
+          return groups;
+        }, [])
+      );
 
       return this.carritoReduced;
     },
     createCart() {
-      const total = this.carritoReduced.reduce((sum, product) => sum + (product.price * product.cantidad), 0);
+      const total = this.carritoReduced.reduce(
+        (sum, product) => sum + product.price * product.cantidad,
+        0
+      );
       const order = {
         ...this.carritoReduced,
         total: total, // Agregar la suma total
         user_id: this.authenticated, // Agregar el ID del cliente
-        status:'unconfirmed'
+        status: "unconfirmed"
       };
       console.log(this.carritoReduced);
       console.log(order);
-      axios.post(window.location.href.substring(0,window.location.href.indexOf("public/") + 7) + "api/orders",order)
-      .then(response => {
-      // Lógica adicional cuando la petición es exitosa
-      console.log(response.data);
-    })
-    .catch(error => {
-      // Manejo de errores cuando la petición falla
-      console.error(error);
-    });
+      axios
+        .post(
+          window.location.href.substring(
+            0,
+            window.location.href.indexOf("public/") + 7
+          ) + "api/orders",
+          order
+        )
+        .then(response => {
+          // Lógica adicional cuando la petición es exitosa
+         
+          Swal.fire("Good job!",response.data.message, "success");
+          console.log(response.data);
+        })
+        .catch(error => {
+          // Manejo de errores cuando la petición falla
+          console.error(error);
+        });
       // Aquí puedes realizar la lógica adicional para crear la orden con el objeto `order`
     }
-  },
+  }
 };
 </script>
