@@ -17,7 +17,7 @@
                         <div
                             class="card-header bg-{{ $order->status === 'unconfirmed' ? 'danger' : ($order->status === 'confirmed' ? 'success' : 'warning') }}">
                             Orden {{ $order->status }}</div>
-                        <div class="card-body overflow-scroll">
+                        <div class="card-body">
                             <h5 class="card-title">Productos comprados </h5>
                             <ul>
                                 @foreach ($order->products as $product)

@@ -13,7 +13,7 @@
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                         {{-- @dd(asset('storage/images/' . $user->image)) --}}
                         <img src="{{ $user->image ? asset($user->image) : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' }}"
-                            alt="user-avatar" width="200px" height="350px" class="d-block w-px-100 h-px-100 rounded" />
+                            alt="user-avatar" width="200px" height="350px" class="d-block w-px-100 h-px-100 rounded" style="object-fit: cover;" />
                         <div class="button-wrapper">
                             <label for="upload" class="btn btn-secondary me-2 mb-3" tabindex="0">
                                 <span class="d-none d-sm-block">Upload new photo</span>
