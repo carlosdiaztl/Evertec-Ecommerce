@@ -52,92 +52,24 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2" style="background-color: #607D8B">
-        <!-- Container wrapper -->
-        <div class="container-fluid">
-
-            <!-- Navbar brand -->
-            <span class="navbar-brand">Categories:</span>
-
-            <!-- Toggle button -->
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                data-mdb-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-
-            </button>
-
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    <!-- Link -->
-
-                    <li class="nav-item">
-                        <form>
-                            <input class="d-none" type="number" value="" name="search">
-
-
-                            <button class="btn nav-link text-white mx-2 my-2 shadow-none" type="submit">All</button>
-                        </form>
-                    </li>
-                    @if ($categories->count())
-                        @foreach ($categories as $category)
-                            <li class="nav-item">
-                                <form>
-                                    <input class="d-none" type="number" value="{{ $category->id }}" name="category">
-
-                                    <button class="btn nav-link text-white mx-2 my-2 shadow-none"
-                                        type="submit">{{ $category->name }}</button>
-                                </form>
-                            </li>
-                        @endforeach
-                    @else
-                        <li class="nav-item">
-                            <button class="btn nav-link text-white shadow-none">
-                                No hay categorias para mostrar
-                            </button>
-                        </li>
-                    @endif
-
-
-                </ul>
-
-                <!-- Search -->
-                <form class="form-inline my-2 my-lg-0 d-flex">
-
-
-                    <input class="form-control mr-sm-2 mx-2 form-control-sm" type="search" name="search"
-                        placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline text-white my-2 my-sm-0" type="submit">Search</button>
-
-                </form>
-
-            </div>
-        </div>
-        <!-- Container wrapper -->
-    </nav>
+   
     <!-- Navbar -->
-    <div class="container">
-
-
         <!-- Products -->
-
         <!-- Products -->
+       
         <section>
             <div id="app">
                 {{-- <product-component products="{{ json_encode($products) }}"></product-component> --}}
-        <product-example  authenticated="{{ auth()->user() && auth()->user()->id ? auth()->user()->id :null}}" ></product-example>
+        <product-example  authenticated="{{ auth()->user() && auth()->user()->id ? auth()->user()->id :null}}" categories="{{json_encode($categories) }}" ></product-example>
                 
             </div>
            
         </section>
 
-
         <!-- Pagination -->
         {{-- {{ $products->links('pagination::bootstrap-5') }} --}}
         <!-- Pagination -->
-    </div>
+    
     <footer class="text-center text-white w-100" style="background-color: #607D8B;">
 
         <!--Call to action-->
