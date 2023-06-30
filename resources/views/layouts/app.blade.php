@@ -49,7 +49,7 @@
                             class="list-group-item list-group-item-action py-2 ripple"><i
                                 class="fas fa-store fa-fw me-3"></i><span>Products</span></a>
                     @else
-                        <a href="{{ route('home') }}" class="list-group-item list-group-item-action py-2 ripple"><i
+                        <a href="{{ route('welcome') }}" class="list-group-item list-group-item-action py-2 ripple"><i
                                 class="fas fa-store fa-fw me-3"></i><span>Products</span></a>
                     @endcan
                     @if (auth() && auth()->user())

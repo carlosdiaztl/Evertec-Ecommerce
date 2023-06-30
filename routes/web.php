@@ -25,9 +25,9 @@ Route::get('/cache', function () {
     Artisan::call('route:clear');
     dd('cache clear');
 });
+Auth::routes(['verify' => true]);
 
 // verificcion en rutas auth
-Auth::routes(['verify' => true]);
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('verified',)->group(function () {

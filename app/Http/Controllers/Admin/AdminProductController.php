@@ -40,6 +40,9 @@ class AdminProductController extends Controller
      */
     public function store(AdminProductStore $request)
     {
+        if ($request->hasFile('image')) {
+
+       
         $path = $request['image']->store('public/images');
         $newpath = str_replace("public", "storage", $path);
         $product = new Product([
@@ -54,6 +57,12 @@ class AdminProductController extends Controller
         $product->save();
 
         return redirect()->back()->with(['success' => 'Producto creado']);
+         }
+         $product= new Product($request->validated());
+         $product->save();
+         
+         return redirect()->back()->with(['success' => 'Producto creado']);
+         
 
         //
     }

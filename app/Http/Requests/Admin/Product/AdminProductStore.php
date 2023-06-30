@@ -31,7 +31,7 @@ class AdminProductStore extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             'stock' => ['required', 'int', 'min:1', 'max:9999'],
             'price' => ['required', 'int', 'min:1000', 'max:1000000'],
-            'image' => ['required', 'image', 'mimes:jpeg,png', 'max:2000'],
+            'image' => [ 'image', 'mimes:jpeg,png', 'max:2000'],
         ];
     }
 

@@ -56,11 +56,17 @@
     <!-- Navbar -->
         <!-- Products -->
         <!-- Products -->
+       {{-- {{route('api.products')}} --}}
+     
        
         <section>
             <div id="app">
                 {{-- <product-component products="{{ json_encode($products) }}"></product-component> --}}
-        <product-example  authenticated="{{ auth()->user() && auth()->user()->id ? auth()->user()->id :null}}" categories="{{json_encode($categories) }}" ></product-example>
+        <product-example  authenticated="{{ auth()->user() && auth()->user()->id ? auth()->user()->id :null}}" categories="{{json_encode($categories) }}"
+            rutagetproducts="{{route('api.products') }}"
+            rutasendorder={{route('orders.store')}} 
+            rutaimagen={{asset('')}}
+            ></product-example>
                 
             </div>
            

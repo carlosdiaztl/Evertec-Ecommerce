@@ -7,7 +7,7 @@
                     Bienvenido que deseas hacer ?
                 </h2>
                 <a href="{{route('admin.users.index')}}" class="btn btn-primary mt-2 col-6">Ver usuarios </a>
-                <a href="{{route('admin.products.index')}}" class="btn btn-primary mt-2 col-6">Ver usuarios </a>
+                <a href="{{route('admin.products.index')}}" class="btn btn-primary mt-2 col-6">Ver productos </a>
             </div>
         </div>
     </div>
