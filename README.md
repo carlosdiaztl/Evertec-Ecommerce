@@ -10,6 +10,7 @@
   <li>Accede al directorio del proyecto</li>
   <li>Instala las dependencias del proyecto utilizando Composer -> composer install</li>
   <li>Instala las dependencias del proyecto utilizando Node-> npm install</li>
+     <li>Preparacion dle proyecto  del proyecto utilizando Node-> npm run build</li>
   <li>Copia el archivo de configuración `.env.example` y renómbralo como `.env`</li>
   <li>Genera una nueva clave de aplicación ->  php artisan key:generate</li>
   <li>Configura la conexión a la base de datos en el archivo `.env`</li>
