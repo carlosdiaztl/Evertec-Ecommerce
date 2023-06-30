@@ -6,7 +6,6 @@
         <!-- Navbar brand -->
         <span class="navbar-brand">Categories:</span>
 
-        <!-- Toggle button -->
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent2"
           aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-bars"></i>
@@ -166,7 +165,8 @@
             </div>
             <div class="modal-footer border-0">
               <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" @click="createCart" class="btn btn-success">Confirmar orden</button>
+              <button type="button" @click="createCart" class="btn btn-success" 
+              v-if="tieneElementos && authenticated" >Confirmar orden</button>
             </div>
           </div>
         </div>
@@ -190,7 +190,6 @@ export default {
       hasNextPage: false,
       carrito: [],
       carritoReduced: [],
-      categories: []
     };
   },
   props: {
@@ -201,14 +200,23 @@ export default {
     categories: {
       type: Array,
       required: true
+    },
+    rutagetproducts: {
+      type: Text,
+      required: true
+    }
+    ,rutasendorder:{
+      type: Text,
+      required: true
+    }
+    ,rutaimagen:{
+      type: Text,
+      required: true
     }
   },
   mounted() {
     this.fetchPage(
-      window.location.href.substring(
-        0,
-        window.location.href.indexOf("public/") + 7
-      ) + "api/products"
+     this.rutagetproducts
     );
     this.carrito = JSON.parse(localStorage.getItem("carrito"))
       ? JSON.parse(localStorage.getItem("carrito"))
@@ -234,24 +242,15 @@ export default {
     
     submitForm(categoryId) {
       const urlcategory =
-        window.location.href.substring(
-          0,
-          window.location.href.indexOf("public/") + 7
-        ) + `api/products?category=${categoryId}`;
-      const urlAll =
-        window.location.href.substring(
-          0,
-          window.location.href.indexOf("public/") + 7
-        ) + `api/products`;
+       
+     this.rutagetproducts + `?category=${categoryId}`;
+      
       categoryId == "all"
-        ? this.fetchPage(urlAll)
+        ? this.fetchPage(this.rutagetproducts)
         : this.fetchPage(urlcategory);
     },
     searchFormSubmit() {
-      const url =window.location.href.substring(
-          0,
-          window.location.href.indexOf("public/") + 7
-        ) +`api/products?search=${encodeURIComponent(this.searchQuery)}`;
+      const url = this.rutagetproducts+`?search=${encodeURIComponent(this.searchQuery)}`;
       this.fetchPage(url);
     },
     addCart(item) {
@@ -265,12 +264,10 @@ export default {
     },
 
     getImage(rutaProducto) {
-      const baseUrl = window.location.href.substring(
-        0,
-        window.location.href.indexOf("public/") + 7
-      );
+      const baseUrl = this.rutaimagen;
       return baseUrl + rutaProducto;
     },
+
     eliminarElementoCarrito(id) {
       // Busca el índice del elemento con el ID especificado en el carrito
       const index = this.carrito.findIndex(producto => producto.id === id);
@@ -325,10 +322,7 @@ export default {
       console.log(order);
       axios
         .post(
-          window.location.href.substring(
-            0,
-            window.location.href.indexOf("public/") + 7
-          ) + "api/orders",
+         this.rutasendorder,
           order
         )
         .then(response => {
@@ -336,12 +330,19 @@ export default {
 
           Swal.fire("Good job!", response.data.message, "success");
           console.log(response.data);
+          console.log('vaciar carrito');
+          this.carritoReduced=[];
+        this.carrito=[];
+        localStorage.setItem("carrito",[]);
+          
+
         })
         .catch(error => {
+          Swal.fire("error",error, "error");
           // Manejo de errores cuando la petición falla
           console.error(error);
         });
-      // Aquí puedes realizar la lógica adicional para crear la orden con el objeto `order`
+       
     }
   }
 };

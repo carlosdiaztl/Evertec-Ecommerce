@@ -20,7 +20,7 @@ return new class() extends Migration
             $table->unsignedBigInteger('stock');
             $table->enum('status', ['available', 'unavailable',])->default('available');
             $table->unsignedBigInteger('price');
-            $table->string('image');
+            $table->string('image')->default('image-product-default.png');
             $table->timestamps();
         });
     }
