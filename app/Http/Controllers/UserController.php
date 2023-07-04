@@ -32,11 +32,11 @@ class UserController extends Controller
 
             $user->update(
                 [
-                    'password' => Hash::make($request->password),
+                     'password' => Hash::make($request->input('password')),
                 ]
             );
 
-            return redirect()->back()->withSuccess("Clave modificada con exito ");
+            return redirect()->back()->with('success','Clave modificada con exito');
         }
         if ($request->has('image')) {
             // fasat storage storage para buscar el patch de la imagen actual y borrarla
@@ -54,8 +54,7 @@ class UserController extends Controller
                     'image' => $newpath,
                 ]
             );
-
-            return redirect()->back()->withSuccess("Imagen actualizada con exito ");
+            return redirect()->back()->with('success','Imagen actualizada con exito');
         }
 
 
