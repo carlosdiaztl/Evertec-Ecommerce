@@ -33,10 +33,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('verified',)->group(function () {
         Route::resource('users', AdminUserController::class)->names('users')->except('store')->middleware(['can:admin.users.index', 'can:admin.users.edit']);
         Route::resource('products', AdminProductController::class)->names('products')->middleware('can:admin.products.index');
+        Route::post('products-store-excel',[ AdminProductController::class,'importExcel'])->name('products.store-excel');
         Route::resource('categories', CategoryController::class)->names('categories')->middleware('can:admin.products.index');
         Route::get('/home', [AdminHomeController::class, 'index'])->name('home');
         Route::get('users-pdf-export', [AdminUserController::class, 'exportPDF'])->name('users-pdf-export');
         Route::get('users-excel-export', [AdminUserController::class, 'exportExcel'])->name('users-excel-export');
+        Route::get('products-pdf-export', [AdminProductController::class, 'exportPDF'])->name('products-pdf-export');
+        Route::get('products-excel-export', [AdminProductController::class, 'exportExcel'])->name('products-excel-export');
 
     
     });
