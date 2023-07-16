@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin\Products;
 
+use App\Exports\ProductExport;
 use App\Models\Category;
 use App\Models\Product;
 use Tests\TestCase;
@@ -9,6 +10,10 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\File;
+use Illuminate\Http\UploadedFile;
+use Maatwebsite\Excel\Facades\Excel;
+use stdClass;
 
 class ProductTest extends TestCase
 {
@@ -51,5 +56,39 @@ class ProductTest extends TestCase
             $response->assertSee($product->category->name);
             $response->assertSee($product->status);
         }
+    }
+    public function test_export_products_excel(): void
+    {
+      
+
+        $role1 = Role::create(['name' => 'Admin']);
+        Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+        $user = User::factory()->create()->assignRole('Admin');
+        Category::factory()->count(2)->create();
+        Product::factory()->count(2)->create();
+        Excel::fake();
+        $response = $this->actingAs($user)->get(route('admin.products-excel-export'));
+        $response->assertOk();
+        Excel::assertDownloaded('products.xlsx');
+        $downloadedFile = $response->baseResponse->getFile()->getRealPath();
+        $this->assertIsString($downloadedFile);
+         
+    }
+    public function test_export_Import_Products(){
+        Excel::fake();
+        $role1 = Role::create(['name' => 'Admin']);
+        Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+        $user = User::factory()->create()->assignRole('Admin');
+        // Crear el archivo Excel falso
+       
+        $file = new File('products.xlsx', false); // El segundo parámetro indica que no es un archivo real
+      
+        $response = $this->actingAs($user)->post(route('admin.products.store-excel'), ['file' => $file]);
+       
+        $response->assertRedirect(route('admin.products.index'));
+        $response->assertSessionHas('success', 'Productos importados con exito');
+      
     }
 }
