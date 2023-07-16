@@ -58,11 +58,11 @@
                                 class="fas fa-user fa-fw me-3"></i><span>Profile</span></a>
                     @endif
                     @if (auth() && auth()->user())
-                    @if (count(auth()->user()->orders) )
-                    <a href="{{ route('orders.index', auth()->user()->id) }}"
-                        class="list-group-item list-group-item-action py-2 ripple "><i
-                            class="fas fa-shopping-bag fa-fw me-3"></i><span>Orders</span></a>
-                    @endif
+                        @if (count(auth()->user()->orders))
+                            <a href="{{ route('orders.index', auth()->user()->id) }}"
+                                class="list-group-item list-group-item-action py-2 ripple "><i
+                                    class="fas fa-shopping-bag fa-fw me-3"></i><span>Orders</span></a>
+                        @endif
                     @endif
 
                     {{-- <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
@@ -221,22 +221,29 @@
 
     <!--Main layout-->
     <main class="{{ auth() && auth()->user() ? 'mt-5 pt-3 sidebarauth' : 'mt-5 pt-3' }}">
-
-        @yield('content')
-
         @if (isset($errors) && $errors->any())
             <div class="container text-center">
 
 
                 <div class="alert alert-danger">
                     <ul>
-                        @foreach ($errors->all() as $error)
+                        @foreach ($errors->all() as $key => $error)
                             <li>{{ $error }}</li>
+                            @if ($key === 7 && $errors->count() > 8)
+                            <li>...</li>
+                        @endif
+                        @if ($key === 7)
+                            @php break; @endphp
+                        @endif
                         @endforeach
                     </ul>
                 </div>
             </div>
-
+            @php
+                header('Refresh: 4');
+                Session::forget('errors');
+                
+            @endphp
             <script>
                 Swal.fire({
                     icon: 'error',
@@ -245,6 +252,9 @@
                 })
             </script>
         @endif
+        @yield('content')
+
+
     </main>
     <!--Main layout-->
     <!-- MDB -->

@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Constants;
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\Product\AdminProductStore;
 use App\Http\Requests\Admin\Product\AdminProductUpdate;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
 {
@@ -22,7 +27,23 @@ class AdminProductController extends Controller
         return view('admin.products.index', compact('products'));
         //
     }
+    public function exportExcel()
+    {
+        return Excel::download(new ProductExport(), 'products.xlsx');
+    }
+    public function exportPDF()
+    {
+        $products = Product::all();
+        $pdf = FacadePdf::loadView('admin.products.export-excel', compact('products'));
 
+        return $pdf->download('product-list.pdf');
+    }
+    public function importExcel(Request $request){
+       $file=$request->file('import_file');
+       Excel::import(new ProductImport,$file);
+      return redirect()->route('admin.products.index')->with('success','Productos importados con exito');
+
+    }
     /**
      * Show the form for creating a new resource.
      */

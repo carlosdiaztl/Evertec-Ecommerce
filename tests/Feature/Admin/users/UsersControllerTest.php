@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin\Users;
 
+use App\Exports\UsersExport;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Http\Controllers\Admin\AdminUserController;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersControllerTest extends TestCase
 {
@@ -47,5 +49,19 @@ class UsersControllerTest extends TestCase
         $response = $this->actingAs($user)->get(route('admin.users.edit', $user2));
         $response->assertOk();
         $response->assertViewIs('admin.users.edit');
+    }
+    public function it_can_export_users_to_excel()
+    {
+        Excel::fake(); // Simular el comportamiento de Excel
+
+        $response = $this->get('users-excel-export'); // Reemplaza "/export/users" por la ruta a tu controlador de exportación
+
+        $response->assertOk(); // Asegurarse de que la respuesta sea exitosa
+
+        Excel::assertDownloaded('users.xlsx', function (UsersExport $export) {
+            // Realizar aserciones sobre el contenido de la exportación si es necesario
+            // Por ejemplo, puedes verificar si los datos exportados son correctos
+            return true;
+        });
     }
 }
