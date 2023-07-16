@@ -18,7 +18,7 @@ class ProductImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
     private $categories;
     public function __construct()
     {
-        $this->categories = Category::pluck('id', 'name');
+        $this->categories = Category::all()->pluck('id', 'name');
         // se obtiene como una lista clave valor, busca ese id
         //  a que name pertenece en categories y pone dicho valor
     }
