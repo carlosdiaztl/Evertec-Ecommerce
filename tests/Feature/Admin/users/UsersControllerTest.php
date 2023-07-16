@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Http\Controllers\Admin\AdminUserController;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersControllerTest extends TestCase
 {
@@ -47,5 +48,15 @@ class UsersControllerTest extends TestCase
         $response = $this->actingAs($user)->get(route('admin.users.edit', $user2));
         $response->assertOk();
         $response->assertViewIs('admin.users.edit');
+    }
+    public function test_export_users_excel(): void
+    { 
+        $role1 = Role::create(['name' => 'Admin']);
+        Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
+        Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
+        $user = User::factory()->create()->assignRole('Admin');
+        Excel::fake();
+        $response = $this->actingAs($user)->get(route('admin.users-excel-export'));
+        $response->assertOk();
     }
 }

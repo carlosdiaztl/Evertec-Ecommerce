@@ -5,7 +5,18 @@
         <a class="btn btn-primary mb-2" href="{{ route('admin.categories.index') }}">View categories</a>
         @if ($products->count())
             <div class="card">
-                <h5 class="card-header">Products</h5>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Products</h5>
+
+                    <form action="{{ route('admin.products.store-excel') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
+                        <input class="form-control" type="file" name="import_file" >
+                        <button type="submit" class="btn btn-outline-primary"> <i class="fas fa-upload mx-1 "></i> importar</button>
+                    </form>
+
+
+                </div>
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="bg-secondary">
@@ -79,15 +90,33 @@
 
 
                 </div>
-                <div class="col-12 px-4">
+                <div class="row">
+                    <div class="col-10">
+                        {{ $products->links('pagination::bootstrap-5') }}
+                    </div>
 
-                    {{ $products->links('pagination::bootstrap-5') }}
+                    <div class="col-2 m-0">
+                        <div class="demo-inline-spacing">
+                            <div class="btn-group" id="hover-dropdown-demo">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    data-trigger="hover">
+                                    Export
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li> <a class="dropdown-item" href="{{ route('admin.products-pdf-export') }}">Pdf
+                                        </a></li>
+                                    <li> <a class="dropdown-item" href="{{ route('admin.products-excel-export') }}">
+                                            Excel</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-        @else
-            <div class="card-body">
-                <strong>No hay registros</strong>
-            </div>
+            @else
+                <div class="card-body">
+                    <strong>No hay registros</strong>
+                </div>
         @endif
 
     </div>
