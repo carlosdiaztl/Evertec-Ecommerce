@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class PublicProductController extends Controller
 {
     public function index(Request $request){
 
@@ -29,5 +29,4 @@ class ProductController extends Controller
         return response()->json($products);
 
     }
-    //
 }
