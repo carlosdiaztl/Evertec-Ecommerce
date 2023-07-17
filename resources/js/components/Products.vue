@@ -73,9 +73,10 @@
               <h6 class="price">$ {{  formatPrice(item.price) }}</h6>
             </div>
             <div class="card-footer bg-white border-0 text-150">
-              <button v-if="authenticated" @click="addCart(item)" class="btn btn-success btn-sm mb-3">
-                Add
-                <i class="fas fa-cart-plus"></i>
+              <button title="Añadir al carrito" v-if="authenticated" @click="addCart(item)" class="btn btn-success btn-sm mb-3">
+                 <i title="Añadir al carrito" class="fas fa-cart-plus fa-lg m-1 "></i>
+                 
+               
               </button>
             </div>
           </div>
@@ -113,7 +114,7 @@
               <div class="onboarding-content mb-0">
                 <h4>Tu lista</h4>
 
-                <div class="card h-100">
+                <div class="card h-100 border-top-0">
                   <div class="card-header d-flex justify-content-between">
                     <div class="card-title m-0 me-2">
                       <h5 class="m-0 me-2">Popular Products</h5>
