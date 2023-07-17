@@ -25,7 +25,7 @@ Route::name('api-')->group(function(){
     Route::post('login', LoginController::class)->name('login');
     Route::post('register',RegisterController::class)->name('register');
 });
-Route::middleware('auth:sanctum')->name('private')->group(function () {
+Route::middleware('auth:sanctum','can:admin.products.index')->name('private')->group(function () {
     Route::resource('products', ProductController::class)->names('products');
     // aqui las rutas de productos 
 });
