@@ -32,7 +32,7 @@ class ProductController extends Controller
        
        
         // Crear un nuevo producto en la base de datos
-        $product = Product::create([
+        $product = new Product([
             'title' => $request->input('title'),
             'category_id' => $request->input('category_id'),
             'description' => $request->input('description'),
@@ -50,15 +50,15 @@ class ProductController extends Controller
      */
     public function show($id): JsonResponse
     {
-        $product = Product::find($id);
-
-        if (!$product) {
+        try {
+            $product = Product::query()->where('id', $id)->firstOrFail();
+    
+            // Devolver el producto como respuesta JSON
+            return response()->json($product);
+        } catch (ModelNotFoundException $exception) {
             // Si no se encuentra el producto, devolver una respuesta 404 Not Found
             return response()->json(['error' => 'Producto no encontrado'], 404);
         }
-
-        // Devolver el producto como respuesta JSON
-        return response()->json($product);
     }
 
     /**
@@ -67,7 +67,7 @@ class ProductController extends Controller
     public function update(AdminProductUpdate $request,$id)
     {
         try {
-            $product = Product::findOrFail($id);
+            $product = Product::query()->where('id', $id)->firstOrFail();
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Producto no encontrado'], 404);
         }
@@ -91,7 +91,7 @@ class ProductController extends Controller
      */
     public function destroy($id): JsonResponse
     {
-        $product = Product::find($id);
+        $product = Product::query()->find($id);
 
         if (!$product) {
             // Si no se encuentra el producto, devolver una respuesta 404 Not Found
