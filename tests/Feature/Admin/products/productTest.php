@@ -59,7 +59,7 @@ class ProductTest extends TestCase
     }
     public function test_export_products_excel(): void
     {
-      
+
 
         $role1 = Role::create(['name' => 'Admin']);
         Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
@@ -73,22 +73,24 @@ class ProductTest extends TestCase
         Excel::assertDownloaded('products.xlsx');
         $downloadedFile = $response->baseResponse->getFile()->getRealPath();
         $this->assertIsString($downloadedFile);
-         
     }
-    public function test_export_Import_Products(){
+    public function test_Import_Products_Excel()
+    {
         Excel::fake();
         $role1 = Role::create(['name' => 'Admin']);
         Permission::create(['name' => 'admin.users.index'])->assignRole($role1);
         Permission::create(['name' => 'admin.users.edit'])->assignRole($role1);
         $user = User::factory()->create()->assignRole('Admin');
         // Crear el archivo Excel falso
-       
-        $file = new File('products.xlsx', false); // El segundo parámetro indica que no es un archivo real
-      
-        $response = $this->actingAs($user)->post(route('admin.products.store-excel'), ['file' => $file]);
-       
+
+        // $file = new File('products.xlsx', false); // El segundo parámetro indica que no es un archivo real
+
+        // $response = $this->actingAs($user)->post(route('admin.products.store-excel'), ['file' => $file]);
+        $fakeExcelFile = UploadedFile::fake()->create('products.xlsx', 1024);
+        $response = $this->actingAs($user)->post(route('admin.products.store-excel'), [
+            'import_file' => $fakeExcelFile,
+        ]);
         $response->assertRedirect(route('admin.products.index'));
         $response->assertSessionHas('success', 'Productos importados con exito');
-      
     }
 }
