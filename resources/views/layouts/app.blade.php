@@ -202,12 +202,6 @@
                                 <a class="dropdown-item" href="{{ route('user.edit', auth()->user()->id) }}">
                                     Ver perfil
                                 </a>
-
-
-
-
-
-
                             @endguest
                         </ul>
                     </li>
