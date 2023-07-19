@@ -59,4 +59,5 @@ class UsersControllerTest extends TestCase
         $response = $this->actingAs($user)->get(route('admin.users-excel-export'));
         $response->assertOk();
     }
+ 
 }
