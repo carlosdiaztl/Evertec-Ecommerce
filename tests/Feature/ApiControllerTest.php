@@ -1,26 +1,21 @@
 <?php
 
-namespace Tests\Feature\Api;
+namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ApiController extends TestCase
+class ApiControllerTest extends TestCase
 {
-    use RefreshDatabase;
     /**
      * A basic feature test example.
      */
-    public function test_example(): void
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
-    }
     
-    public function itCanValidatedWhenLogin(): void
+    public function test_itCanValidatedWhenLogin(): void
     {
         $response = $this->post(route('api-login'), [
             'email' => 'email@',
@@ -30,10 +25,10 @@ class ApiController extends TestCase
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['password']);
     }
-    public function itCanLogin(): void
+    public function test_itCanLogin(): void
     {
         $user = User::factory()->create();
-        $email= $user->get('email');
+        $email = $user->email;
 
         $response = $this->post(route('api-login'), [
             'email' => $email,
@@ -46,10 +41,10 @@ class ApiController extends TestCase
             'access_token',
         ]);
     }
-    public function itCanValidatedPasswordWrongWhenLogin(): void
+    public function test_itCanValidatedPasswordWrongWhenLogin(): void
     {
         $user = User::factory()->create();
-        $email= $user->get('email');
+        $email = $user->email;
 
         $response = $this->post(route('api-login'), [
             'email' => $email,
