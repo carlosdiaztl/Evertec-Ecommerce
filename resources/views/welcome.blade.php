@@ -65,7 +65,7 @@
         <product-example  authenticated="{{ auth()->user() && auth()->user()->id ? auth()->user()->id :null}}" categories="{{json_encode($categories) }}"
             rutagetproducts="{{route('api.products') }}"
             rutasendorder={{route('orders.store')}} 
-            rutaimagen={{asset('')}}
+            rutaimagen={{secure_asset('')}}
             ></product-example>
                 
             </div>
