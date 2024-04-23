@@ -166,7 +166,7 @@
                                 <img src="{{ secure_asset(auth()->user()->image) }}" class="rounded-circle" height="22"
                                     alt="" loading="lazy" />
                             @else
-                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img(31).jpg"
                                     class="rounded-circle" height="22" alt="" loading="lazy" />
                             @endif
                         </a>
