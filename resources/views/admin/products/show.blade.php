@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/product.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/product.css') }}">
 @endsection
 @section('content')
     <!--Main layout-->
@@ -13,7 +13,7 @@
         <div class="row">
             <!--Grid column-->
             <div class="col-md-6 mb-4">
-                <img src={{ asset($product->image) }} class="img-fluid" alt="" />
+                <img src={{ secure_asset($product->image) }} class="img-fluid" alt="" />
             </div>
             <!--Grid column-->
 

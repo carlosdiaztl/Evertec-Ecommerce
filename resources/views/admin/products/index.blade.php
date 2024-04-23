@@ -56,7 +56,7 @@
                                     <td>
 
 
-                                        <img src="{{ asset($product->image) }}" alt="Avatar" class="rounded-circle"
+                                        <img src="{{ secure_asset($product->image) }}" alt="Avatar" class="rounded-circle"
                                             height="70px" width="70px" />
 
 
