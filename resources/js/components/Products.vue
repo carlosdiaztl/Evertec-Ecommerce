@@ -219,6 +219,7 @@ export default {
     this.fetchPage(
      this.rutagetproducts
     );
+    console.log(this.rutagetproducts);
     this.carrito = JSON.parse(localStorage.getItem("carrito"))
       ? JSON.parse(localStorage.getItem("carrito"))
       : [];

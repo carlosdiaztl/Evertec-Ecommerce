@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
     <!-- MDB -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/mdb.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/admin.css') }}">
     @yield('css')
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -163,7 +163,7 @@
                             id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
                             aria-expanded="false">
                             @if (auth() && isset(auth()->user()->image))
-                                <img src="{{ asset(auth()->user()->image) }}" class="rounded-circle" height="22"
+                                <img src="{{ secure_asset(auth()->user()->image) }}" class="rounded-circle" height="22"
                                     alt="" loading="lazy" />
                             @else
                                 <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
@@ -252,7 +252,7 @@
     </main>
     <!--Main layout-->
     <!-- MDB -->
-    <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+    <script type="text/javascript" src="{{ secure_asset('js/mdb.min.js') }}"></script>
     <!-- Custom scripts -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
