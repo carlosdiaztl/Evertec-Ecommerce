@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         getImageUrl(image) {
-            return "http://localhost/Evertec-Ecommerce/public/" + image; // Concatenate the image URL with additional text
+            return "https://localhost/Evertec-Ecommerce/public/" + image; // Concatenate the image URL with additional text
         },
     },
 };
