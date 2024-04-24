@@ -215,21 +215,27 @@ export default {
       required: true
     }
   },
-  mounted() {
+mounted() {
+    // Reemplaza "http://" con "https://" en la URL de la API
+    const secureUrl = this.rutagetproducts.replace('http://', 'https://');
     
-    this.fetchPage(
-      
-     this.rutagetproducts
+    // Realiza la primera solicitud utilizando la URL segura
+    this.fetchPage(secureUrl);
+    
+    // Realiza la segunda solicitud utilizando la URL original (sin modificar)
+    this.fetchPage(this.rutagetproducts);
 
-    );
-    this.carrito = JSON.parse(localStorage.getItem("carrito"))
-      ? JSON.parse(localStorage.getItem("carrito"))
-      : [];
-  },
+    // Carga los datos del carrito
+    this.carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+},
   methods: {
     fetchPage(url) {
+      console.log(url);
+
+      const secureUrl = url.replace('http://', 'https://');
+      console.log(secureUrl);
       axios
-        .get(url)
+        .get(secureUrl)
         .then(response => {
           this.items = response.data.data;
           this.currentPage = response.data.current_page;
