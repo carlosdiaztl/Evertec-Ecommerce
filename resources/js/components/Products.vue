@@ -215,14 +215,19 @@ export default {
       required: true
     }
   },
-  mounted() {
-    this.fetchPage(
-     this.rutagetproducts
-    );
-    this.carrito = JSON.parse(localStorage.getItem("carrito"))
-      ? JSON.parse(localStorage.getItem("carrito"))
-      : [];
-  },
+mounted() {
+    // Reemplaza "http://" con "https://" en la URL de la API
+    const secureUrl = this.rutagetproducts.replace('http://', 'https://');
+    
+    // Realiza la primera solicitud utilizando la URL segura
+    this.fetchPage(secureUrl);
+    
+    // Realiza la segunda solicitud utilizando la URL original (sin modificar)
+    this.fetchPage(this.rutagetproducts);
+
+    // Carga los datos del carrito
+    this.carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+},
   methods: {
     fetchPage(url) {
       axios
