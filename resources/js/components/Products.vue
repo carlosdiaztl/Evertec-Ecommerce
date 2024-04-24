@@ -230,7 +230,8 @@ mounted() {
 },
   methods: {
     fetchPage(url) {
-   axios
+      
+      axios
         .get(url)
         .then(response => {
           this.items = response.data.data;
