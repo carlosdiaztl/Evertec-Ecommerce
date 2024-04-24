@@ -1,0 +1,28 @@
+$naranajsuave:#ff9f43;
+$rojosuave:#ea5455;
+.bg-label-{
+    &secondary {
+        /* Estilos para botón secundario */
+    }
+
+    &primary {
+        /* Estilos para botón primario */
+    }
+
+    &danger {
+        color:$rojosuave ;
+        border-color: transparent !important;
+        background: #fce4e4 !important;
+    }
+
+    &warning {
+        background-color: #fff0e1;
+        border-color: #fff0e1;
+        color: $naranajsuave;
+    }
+
+    &success {
+        background-color: #dff7e9 !important;
+        color: #28c76f !important;
+    }
+}

@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\Product\AdminProductStore;
 use App\Http\Requests\Admin\Product\AdminProductUpdate;
+use App\Http\Requests\Imports\ExcelProductRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class AdminProductController extends Controller
 
         return $pdf->download('product-list.pdf');
     }
-    public function importExcel(Request $request){
+    public function importExcel(ExcelProductRequest $request){
        $file=$request->file('import_file');
        Excel::import(new ProductImport,$file);
       return redirect()->route('admin.products.index')->with('success','Productos importados con exito');
