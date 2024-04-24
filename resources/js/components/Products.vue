@@ -230,9 +230,10 @@ mounted() {
 },
   methods: {
     fetchPage(url) {
-      
+      const secureUrl = url.replace('http://', 'https://');
+      console.log(secureUrl);
       axios
-        .get(url)
+        .get(secureUrl)
         .then(response => {
           this.items = response.data.data;
           this.currentPage = response.data.current_page;
