@@ -18,4 +18,6 @@
   <li>Inicia el servidor de desarrollo npm run dev  y en otra terminal php artisan serve</li>
   <li>Accede a la aplicación en tu navegador web con el usuario diaz-alzate1@hotmail.com clave car123456   </li>
   <li>o para ver como administrador  usuario diaz-alzate@hotmail.com clave car123456   </li>
+  <li>Link de proyecto https://energetic-joy-production.up.railway.app/  </li>
 </ul>
+
