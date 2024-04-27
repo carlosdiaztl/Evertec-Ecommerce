@@ -328,9 +328,10 @@ mounted() {
       };
       console.log(this.carritoReduced);
       console.log(order);
+      const secureUrl = this.rutasendorder.replace('http://', 'https://');
       axios
         .post(
-         this.rutasendorder,
+         secureUrl,
           order
         )
         .then(response => {
@@ -341,7 +342,7 @@ mounted() {
           console.log('vaciar carrito');
           this.carritoReduced=[];
         this.carrito=[];
-        localStorage.setItem("carrito",[]);
+        localStorage.setItem("carrito", JSON.stringify([]));
           
 
         })

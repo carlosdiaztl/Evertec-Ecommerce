@@ -15,10 +15,10 @@ class ForceHttps
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->secure() && env('APP_ENV') === 'local') {
-            // Redirige todas las solicitudes HTTP a HTTPS
-            return redirect()->secure($request->getRequestUri());
-        }
+        // if (!$request->secure() && env('APP_ENV') === 'local') {
+        //     // Redirige todas las solicitudes HTTP a HTTPS
+        //     return redirect()->secure($request->getRequestUri());
+        // }
         return $next($request);
     }
 }
