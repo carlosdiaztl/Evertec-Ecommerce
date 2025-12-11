@@ -2,15 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @method static \Illuminate\Database\Eloquent\Factories\Factory create(array $attributes = [])
- *
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Shirt>
  */
-class ProductFactory extends Factory
+class ShirtFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -26,15 +23,11 @@ class ProductFactory extends Factory
         $path = 'storage/images/' . $filename;
 
         return [
-            'title' => fake()->name('products'),
+            'name' => fake()->name('products'),
             'description' => fake()->paragraph(1),
             'price' => fake()->numberBetween(10000, 50000),
-            'stock' => fake()->numberBetween(1, 100),
-            'status' => fake()->randomElement(['available', 'unavailable',]),
-            'image' => $path,
-            'category_id' => function () {
-                return Category::inRandomOrder()->first()->id;
-            },
+            'quantity' => fake()->numberBetween(1, 100),
+            'image_url' => $path,
 
             //
         ];

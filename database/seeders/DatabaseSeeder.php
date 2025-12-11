@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Shirt;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(50)->unverified()->create();
         Category::factory(3)->create();
         Product::factory(50)->create();
+        Shirt::factory(50)->create();
 
         // seeder de los roles
         $this->call(RoleSeeder::class);

@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\RegisterController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\PublicProductController;
+use App\Http\Controllers\API\ShirtController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::name('api-')->group(function(){
 
     Route::post('login', LoginController::class)->name('login');
     Route::post('register',RegisterController::class)->name('register');
+    Route::resource('shirts', ShirtController::class)->names('shirts');
+
 });
 Route::middleware('auth:sanctum','can:admin.products.index')->name('private')->group(function () {
     Route::resource('products', ProductController::class)->names('products');

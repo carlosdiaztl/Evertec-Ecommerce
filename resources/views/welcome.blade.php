@@ -62,11 +62,18 @@
         <section>
             <div id="app">
                 {{-- <product-component products="{{ json_encode($products) }}"></product-component> --}}
-        <product-example  authenticated="{{ auth()->user() && auth()->user()->id ? auth()->user()->id :null}}" categories="{{json_encode($categories) }}"
-            rutagetproducts="{{secure_url(route('api.products')) }}"
-            rutasendorder={{secure_url(route('orders.store'))}} 
-            rutaimagen={{secure_asset('')}}
-            ></product-example>
+       @php
+            $isLocal = app()->environment('local');
+    @endphp
+
+        <product-example
+            authenticated="{{ auth()->check() ? auth()->id() : null }}"
+            categories="{{ json_encode($categories) }}"
+            rutagetproducts="{{ $isLocal ? url(route('api.products')) : secure_url(route('api.products')) }}"
+            rutasendorder="{{ $isLocal ? url(route('orders.store')) : secure_url(route('orders.store')) }}"
+            rutaimagen="{{ $isLocal ? asset('') : secure_asset('') }}"
+        ></product-example>
+
                 
             </div>
            

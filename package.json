@@ -2,7 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "docker": "docker-test.bat"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

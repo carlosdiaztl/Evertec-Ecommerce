@@ -217,10 +217,10 @@ export default {
   },
 mounted() {
     // Reemplaza "http://" con "https://" en la URL de la API
-    const secureUrl = this.rutagetproducts.replace('http://', 'https://');
+    // const secureUrl = this.rutagetproducts.replace('http://', 'https://');
     
-    // Realiza la primera solicitud utilizando la URL segura
-    this.fetchPage(secureUrl);
+    // // Realiza la primera solicitud utilizando la URL segura
+    // this.fetchPage(secureUrl);
     
     // Realiza la segunda solicitud utilizando la URL original (sin modificar)
     this.fetchPage(this.rutagetproducts);

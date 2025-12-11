@@ -1,0 +1,10 @@
+node_modules
+vendor
+storage/logs
+# storage/framework
+# .env
+*.log
+*.sqlite
+npm-debug.log
+.DS_Store
+public/storage

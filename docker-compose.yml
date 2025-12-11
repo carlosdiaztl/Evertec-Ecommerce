@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - 8000:80
+    volumes:
+      - .:/var/www/html
+  
+    command: >
+      sh -c "
+        cp .env.example .env &&
+        php artisan key:generate &&
+        php artisan storage:link &&
+        php artisan migrate:fresh --seed &&
+        apache2-foreground
+      "
+
