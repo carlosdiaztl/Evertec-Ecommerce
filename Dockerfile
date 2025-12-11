@@ -31,7 +31,7 @@ RUN echo '<Directory /home/site/wwwroot/public>\n\
 # Establecer directorio de trabajo
 WORKDIR /home/site/wwwroot
 
-COPY .env .env
+# COPY .env .env
 # Copiar código Laravel
 COPY . .
 
